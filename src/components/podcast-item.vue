@@ -1,14 +1,14 @@
 <template>
   <a :href=podcast.url target="_blank">
     <div class="podcast-item">
-        <h4>
-            {{ podcast.name }}
-        </h4>
         <div class="content">
             <div>
-                <img :src=podcast.image />
+                <img v-if=podcast.image :src="'static/images/' + podcast.image" />
             </div>
             <div>
+                <h4>
+                    {{ podcast.name }}
+                </h4>
                 {{ podcast.description }}
             </div>
         </div>
@@ -35,5 +35,13 @@ export default {
     padding: 20px;
     width: 30vw;
     box-sizing: border-box;
+}
+
+.content {
+    display: flex;
+}
+
+img {
+    max-width: 100px;
 }
 </style>

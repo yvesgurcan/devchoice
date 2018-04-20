@@ -1,15 +1,17 @@
 <template>
   <a :href=featuredPodcast.url target="_blank">
     <div class="podcast-hero">
-      <h3>
-        {{ featuredPodcast.name }}
-      </h3>
       <div class="content">
         <div>
-          <img :src=featuredPodcast.image />
+          <img v-if=featuredPodcast.image :src="'static/images/' + featuredPodcast.image" />
         </div>
         <div>
-          {{ featuredPodcast.description }}
+          <div>
+            {{ featuredPodcast.name }}
+          </div>
+          <div>
+            {{ featuredPodcast.description }}
+          </div>
         </div>
       </div>
     </div>
