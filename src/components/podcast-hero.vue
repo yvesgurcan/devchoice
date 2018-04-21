@@ -10,6 +10,9 @@
             {{ featuredPodcast.name }}
           </div>
           <div>
+            {{ featuredPodcast.episode }}
+          </div>
+          <div>
             {{ featuredPodcast.description }}
           </div>
         </div>

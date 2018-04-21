@@ -23,8 +23,15 @@ export default {
 
 <style scoped>
 .podcast-list {
-    display: flex;
-    flex-basis: auto;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
+@media (max-width: 900px) {
+  .podcast-list {
+    flex-direction: column;
+  }
+}
+
 </style>

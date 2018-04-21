@@ -1,19 +1,19 @@
 <template>
-  <a :href=podcast.url target="_blank">
-    <div class="podcast-item">
-        <div class="content">
-            <div>
-                <img v-if=podcast.image :src="'static/images/' + podcast.image" />
-            </div>
-            <div>
-                <h4>
-                    {{ podcast.name }}
-                </h4>
-                {{ podcast.description }}
-            </div>
-        </div>
-    </div>
-  </a>
+  <div class="podcast-item">
+      <div class="content">
+          <a :href=podcast.url target="_blank">
+              <div>
+                  <img v-if=podcast.image :src="'static/images/' + podcast.image" />
+              </div>
+          </a>
+          <div>
+              <h4>
+                  {{ podcast.name }}
+              </h4>
+              {{ podcast.description }}
+          </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -30,11 +30,10 @@ export default {
 
 <style scoped>
 .podcast-item {
-    border: 1px solid gray;
-    margin: 20px;
-    padding: 20px;
-    width: 30vw;
-    box-sizing: border-box;
+  border: 1px solid gray;
+  margin: 20px;
+  padding: 20px;
+  flex: 1 0 28%;
 }
 
 .content {
