@@ -3,10 +3,10 @@ window.data = {
     {
       episode: '23 Years of Ruby with Yukihiro Matsumoto',
       name: 'The Changelog',
-      description: 'If you ever wondered how Ruby was invented, this show is for you! The creator of this OOP himself talks about how everything started.',
+      description: 'If you ever wondered how Ruby was invented, this show is for you! The creator of the famous OOP language himself talks about how everything started.',
       url: 'https://changelog.com/podcast/202',
       image: 'matz.jpeg',
-      addedOn: '',
+      addedOn: '2018/04/21',
     },
     {
       episode: 'The state of CSS moving forward in 2018',
@@ -14,6 +14,7 @@ window.data = {
       description: 'A great look at how CSS evolved, where it is at now, and the direction it is taking.',
       url: 'https://thewebplatformpodcast.com/139-the-state-of-css-moving-forward-in-2018',
       image: 'the_web_platform.png',
+      addedOn: '2018/04/05',
     },
     {
       episode: 'Interviews with VPs and Hiring a Tester',

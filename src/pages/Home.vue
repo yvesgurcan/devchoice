@@ -15,13 +15,22 @@ export default {
     PodcastList,
   },
   data() {
-    console.log(window.data)
+    const featuredPodcast = window.data.podcasts
+        .filter(podcast => !podcast.hidden)
+        .filter(podcast => !podcast.addedOn || new Date() > new Date(podcast.addedOn))
+        [0]
+
+    const podcasts = window.data.podcasts
+        .filter(podcast => podcast !== featuredPodcast)
+        .filter(podcast => !podcast.hidden)
+        .filter(podcast => !podcast.addedOn || new Date() > new Date(podcast.addedOn))
+
     return {
-      featuredPodcast: window.data.podcasts[0],
-      podcasts: window.data.podcasts.filter((podcast, index) => index !== 0)
-    };
+      featuredPodcast,
+      podcasts,
+    }
   },
-};
+}
 </script>
 
 <style scoped>
