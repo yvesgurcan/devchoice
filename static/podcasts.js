@@ -1,7 +1,29 @@
 window.data = {
   podcasts: [
     {
-      episode: 'Ionic & Web Component.',
+      addedOn: '2018/07/03',
+    },
+    {
+      addedOn: '2018/06/26',
+    },
+    {
+      addedOn: '2018/06/19',
+    },
+    {
+      addedOn: '2018/06/12',
+    },
+    {
+      addedOn: '2018/06/05',
+    },
+    {
+      episode: 'Imposter syndrome and the Dunning-Kruger effect',
+      name: 'PHP Round Table',
+      description: 'An interesting take on the imposter syndrome with a little bit of PHP flavor in it.',
+      url: 'https://www.phproundtable.com/episode/imposter-syndrome-and-the-dunning-kruger-effect',
+      addedOn: '2018/05/29',
+    },
+    {
+      episode: 'Ionic & Web Component',
       name: 'The Web Platform Podcast',
       description: 'A good intro to the Ionic framework and what web components are.',
       url: 'https://thewebplatformpodcast.com/133-ionic-web-components',
@@ -17,10 +39,10 @@ window.data = {
       addedOn: '2018/05/15',
     },
     {
-      episode: 'Imposter syndrome and the Dunning-Kruger effect',
-      name: 'PHP Round Table',
-      description: 'An interesting take on the imposter syndrome with a little bit of PHP flavor in it.',
-      url: 'https://www.phproundtable.com/episode/imposter-syndrome-and-the-dunning-kruger-effect',
+      episode: 'Command Line Heroes',
+      description: 'An awesome series that explore the story behind the people who transformed technology.',
+      url: 'https://www.redhat.com/en/command-line-heroes',
+      image: 'command_line_heroes.png',
       addedOn: '2018/05/08',
     },
     {

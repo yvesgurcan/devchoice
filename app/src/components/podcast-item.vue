@@ -59,10 +59,9 @@ export default {
 }
 
 .wrapper {
-  margin: auto;
+  /* justify-content: center; */
   height: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 

@@ -15,15 +15,19 @@ export default {
     PodcastList,
   },
   data() {
+    const debug = false
+
     const featuredPodcast = window.data.podcasts
-        .filter(podcast => !podcast.hidden)
-        .filter(podcast => !podcast.addedOn || new Date() > new Date(podcast.addedOn))
+        .filter(podcast => debug || !podcast.hidden)
+        .filter(podcast => debug || !podcast.addedOn || new Date() > new Date(podcast.addedOn))
+        .filter(podcast => podcast.url)
         [0]
 
     const podcasts = window.data.podcasts
         .filter(podcast => podcast !== featuredPodcast)
-        .filter(podcast => !podcast.hidden)
-        .filter(podcast => !podcast.addedOn || new Date() > new Date(podcast.addedOn))
+        .filter(podcast => debug || !podcast.hidden)
+        .filter(podcast => debug || !podcast.addedOn || new Date() > new Date(podcast.addedOn))
+        .filter(podcast => podcast.url)
 
     return {
       featuredPodcast,
