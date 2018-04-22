@@ -16,10 +16,10 @@ window.data = {
       addedOn: '2018/06/05',
     },
     {
-      episode: 'Imposter syndrome and the Dunning-Kruger effect',
-      name: 'PHP Round Table',
-      description: 'An interesting take on the imposter syndrome with a little bit of PHP flavor in it.',
-      url: 'https://www.phproundtable.com/episode/imposter-syndrome-and-the-dunning-kruger-effect',
+      episode: 'Ellie!',
+      name: 'Elm Town',
+      description: 'If you played with Elm, you probably used Ellie to share your code a la JSFiddle. Did you know that Ellie\'s compiler run client-side? Listen to this show to find out more about this awesome tool.',
+      url: 'https://elmtown.audio/3bdfc092',
       addedOn: '2018/05/29',
     },
     {
