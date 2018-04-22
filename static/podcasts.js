@@ -37,6 +37,7 @@ window.data = {
       description: 'An insightful look at how CSS evolved, where it is at now, and the direction it is taking.',
       url: 'https://thewebplatformpodcast.com/139-the-state-of-css-moving-forward-in-2018',
       image: 'the_web_platform.png',
+      addedOn: '2018/04/24',
     },
     {
       episode: 'React: The Big Picture',
