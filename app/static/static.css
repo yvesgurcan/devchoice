@@ -1,0 +1,8 @@
+header {
+  padding-top: 31px;
+  text-align: center;
+}
+
+#app {
+  min-height: 86vh;
+}
