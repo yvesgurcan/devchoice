@@ -1,6 +1,20 @@
 window.data = {
   podcasts: [
     {
+      episode: 'Ionic & Web Component.',
+      name: 'The Web Platform Podcast',
+      description: 'Obviously, this show is a good intro to the Ionic framework and what web components are.',
+      url: 'https://thewebplatformpodcast.com/133-ionic-web-components',
+      image: 'the_web_platform.png',
+    },
+    {
+      episode: 'React: The Big Picture',
+      name: 'JavaScript Jabber',
+      description: 'A great show to put the state of React in 2018 in perspective. The guests compare the Facebook library with Vue and Angular.',
+      url: 'https://devchat.tv/js-jabber/jsj-304-react-the-big-picture',
+      image: '',
+    },
+    {
       episode: '23 Years of Ruby with Yukihiro Matsumoto',
       name: 'The Changelog',
       description: 'If you ever wondered how Ruby was invented, this show is for you! The creator of the famous OOP language himself talks about how everything started.',
