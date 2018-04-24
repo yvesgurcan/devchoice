@@ -1,1 +1,1 @@
-# (devchoice.yvesgurcan.com)[https://devchoice.yvesgurcan.com]
+# [devchoice.yvesgurcan.com](https://devchoice.yvesgurcan.com)
