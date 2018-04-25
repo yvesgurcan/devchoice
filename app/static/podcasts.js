@@ -1,4 +1,5 @@
 window.data = {
+  ...window.data,
   podcasts: [
     {
       addedOn: '2018/07/03',
@@ -39,11 +40,26 @@ window.data = {
       addedOn: '2018/05/15',
     },
     {
+      episode: 'Another Day in the Life of a Netflix Engineer',
+      description: 'This is a classic talk from 2016 all about Netflix. If you haven\'t heard it yet, here is your chance!',
+      url: 'https://www.youtube.com/watch?v=aWgtRKfrtMY',
+      image: 'reinvent_2016.png',
+      addedOn: '2018/05/10',
+    },
+    {
       episode: 'Command Line Heroes',
       description: 'An awesome series that explore the story behind the people who transformed technology.',
       url: 'https://www.redhat.com/en/command-line-heroes',
       image: 'command_line_heroes.png',
       addedOn: '2018/05/08',
+    },
+    {
+      episode: 'Wasted on Elm',
+      name: 'Front End Happy Hour',
+      description: 'Never heard of this podcast? Now is the time to enjoy a true unique experience. Listen to people drinking while they are speaking about dev in public. Grab your own drink and learn about the new hype of functional programming: Elm.',
+      url: 'https://soundcloud.com/front-end-happy-hour/episode-054-wasted-on-elm',
+      image: 'front_end_happy_hour.jpg',
+      addedOn: '2018/05/03',
     },
     {
       episode: '23 Years of Ruby with Yukihiro Matsumoto',
