@@ -17,6 +17,14 @@ window.data = {
       addedOn: '2018/06/05',
     },
     {
+      episode: 'Speak(easy)',
+      name: 'Front End Happy Hour',
+      description: 'Just got an opportunity for a talk? Never talked in front of an audience before? This episode of FEHH is for you!',
+      url: 'https://soundcloud.com/front-end-happy-hour/speakeasy',
+      image: 'front_end_happy_hour.jpg',
+      addedOn: '2018/05/31',
+    },
+    {
       episode: 'Ellie!',
       name: 'Elm Town',
       description: 'If you played with Elm, you probably used Ellie to share your code a la JSFiddle. Did you know that Ellie\'s compiler run client-side? Listen to this show to find out more about this awesome tool.',
@@ -37,10 +45,18 @@ window.data = {
       description: 'A quick approach on what to say or not to say during a job interview.',
       url: 'https://softskills.audio/2018/04/06/episode-104-interviews-with-vps-and-hiring-a-tester/',
       image: 'soft_skills_engineering.png',
+      addedOn: '2018/05/17',
+    },
+    {
+      episode: 'Michael Feathers on Legacy Code',
+      name: 'Software Engineering Radio',
+      description: 'What does legacy code mean? Explore this question with this show by SE Radio.',
+      url: 'http://www.se-radio.net/2017/06/se-radio-episode-295-michael-feathers-on-legacy-code/',
       addedOn: '2018/05/15',
     },
     {
       episode: 'Another Day in the Life of a Netflix Engineer',
+      name: 're:Invent 2016',
       description: 'This is a classic talk from 2016 all about Netflix. If you haven\'t heard it yet, here is your chance!',
       url: 'https://www.youtube.com/watch?v=aWgtRKfrtMY',
       image: 'reinvent_2016.png',
@@ -75,7 +91,7 @@ window.data = {
       description: 'An insightful look at how CSS evolved, where it is at now, and the direction it is taking.',
       url: 'https://thewebplatformpodcast.com/139-the-state-of-css-moving-forward-in-2018',
       image: 'the_web_platform.png',
-      addedOn: '2018/04/24',
+      addedOn: '2018/04/26',
     },
     {
       episode: 'React: The Big Picture',
@@ -83,7 +99,7 @@ window.data = {
       description: 'A great show to put React in perspective. The guests also compare the Facebook library with Vue and Angular.',
       url: 'https://devchat.tv/js-jabber/jsj-304-react-the-big-picture',
       image: 'javascript_jabber.jpg',
-      addedOn: '2018/04/17',
+      addedOn: '2018/04/24',
     },
   ],
 }
