@@ -1,5 +1,8 @@
 <template>
-    <a class="button" :href=href :target=target>
+    <router-link v-if=route class="button" :to=href>
+      {{ label }}
+    </router-link>
+    <a v-else class="button" :href=href :target=target>
       {{ label }}
     </a>
 </template>
@@ -11,6 +14,7 @@ export default {
     'label',
     'href',
     'target',
+    'route',
   ],
   data() {
     return {

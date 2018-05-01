@@ -1,5 +1,5 @@
 <template>
-    <div class="podcast-hero">
+    <div class="podcast-hero" ref="featuredPodcast">
       <div class="content">
         <div class="image">
           <a :href=featuredPodcast.url target="_blank">
@@ -8,9 +8,9 @@
         </div>
         <div>
           <h3>
-            <a :href=featuredPodcast.url target="_blank">
+            <router-link :to="'?a=' + episodeUrlified">
               {{ featuredPodcast.episode }}
-            </a>
+            </router-link>
           </h3>
           <div class="podcast-name">
               {{ featuredPodcast.name }}
@@ -20,7 +20,10 @@
           </div>
           <div class="button-container">
             <button-link label="Listen now" :href=featuredPodcast.url target="_blank" />
-            <!--<button-link label="More like this" :href=featuredPodcast.name />-->
+            <button-link label="More like this" route=true :href="
+              '/' +
+              nameUrlified + '/'
+              + episodeUrlified" />
           </div>
         </div>
       </div>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+import urlify from '@/utils/urlify';
 import ButtonLink from './button-link';
 
 export default {
@@ -35,11 +39,23 @@ export default {
     'featuredPodcast',
   ],
   components: {
-        ButtonLink,
+    ButtonLink,
   },
   data() {
     return {
+      nameUrlified: urlify(this.featuredPodcast.nameSlug || this.featuredPodcast.name),
+      episodeUrlified: urlify(this.featuredPodcast.episodeSlug || this.featuredPodcast.episode),
     };
+  },
+  mounted() {
+    if (this.$route.query.a === this.nameUrlified
+    || this.$route.query.a === this.episodeUrlified) {
+      window.scrollBy({
+        top: this.$refs.featuredPodcast.getBoundingClientRect().top,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
   },
 };
 </script>
