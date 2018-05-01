@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import urlify from '@/utils/urlify';
 import ButtonLink from './button-link';
 
 export default {
@@ -42,6 +43,16 @@ export default {
   data() {
     return {
     };
+  },
+  created() {
+    console.log(urlify(this.podcast.name))
+    if (this.$route.query.a === urlify(this.name)) {
+      window.scrollBy({
+        top: 100,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
   },
 };
 </script>
