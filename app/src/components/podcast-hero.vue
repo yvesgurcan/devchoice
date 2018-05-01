@@ -35,7 +35,7 @@ export default {
     'featuredPodcast',
   ],
   components: {
-        ButtonLink,
+    ButtonLink,
   },
   data() {
     return {

@@ -37,7 +37,7 @@ export default {
     'podcast',
   ],
   components: {
-      ButtonLink,
+    ButtonLink,
   },
   data() {
     return {

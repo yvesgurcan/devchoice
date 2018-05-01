@@ -12,7 +12,7 @@ export default {
     'podcasts',
   ],
   components: {
-        PodcastItem,
+    PodcastItem,
   },
   data() {
     return {
