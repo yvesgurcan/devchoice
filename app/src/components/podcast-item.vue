@@ -1,5 +1,5 @@
 <template>
-  <div class="podcast-item">
+  <div class="podcast-item" ref="podcast">
       <div class="wrapper">
           <div class="content">
               <div class="image">
@@ -9,9 +9,9 @@
               </div>
               <div>
                   <h4>
-                      <a :href=podcast.url target="_blank">
+                      <router-link :to="'?a=' + episodeUrlified">
                           {{ podcast.episode }}
-                      </a>
+                      </router-link>
                   </h4>
                   <div class="podcast-name">
                       {{ podcast.name }}
@@ -23,7 +23,10 @@
           </div>
           <div class="button-container">
               <button-link label="Listen now" :href=podcast.url target="_blank" />
-              <!--<button-link label="More like this" :href=podcast.name />-->
+              <button-link label="More like this" route=true :href="
+              '/' +
+              nameUrlified + '/'
+              + episodeUrlified" />
           </div>
       </div>
   </div>
@@ -42,13 +45,15 @@ export default {
   },
   data() {
     return {
+      nameUrlified: urlify(this.podcast.nameSlug || this.podcast.name),
+      episodeUrlified: urlify(this.podcast.episodeSlug || this.podcast.episode),
     };
   },
-  created() {
-    console.log(urlify(this.podcast.name))
-    if (this.$route.query.a === urlify(this.name)) {
+  mounted() {
+    if (this.$route.query.a === this.nameUrlified
+    || this.$route.query.a === this.episodeUrlified) {
       window.scrollBy({
-        top: 100,
+        top: this.$refs.podcast.getBoundingClientRect().top,
         left: 0,
         behavior: 'smooth',
       });
