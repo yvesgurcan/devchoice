@@ -1,3 +1,5 @@
+/* make sure to edit /app/static/podcasts.js and not /static/podcasts.js */
+
 window.data = {
   ...window.data,
   podcasts: [
