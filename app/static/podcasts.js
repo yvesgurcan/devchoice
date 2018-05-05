@@ -19,7 +19,7 @@ window.data = {
       description: 'Are you up-to-date with what changed with the latest stable release of React? If not, listen to one of the core contributors of the famous Facebook JavaScript library in this episode of TWPP.',
       url: 'https://thewebplatformpodcast.com/156-react-16-fiber-and-beyond',
       image: 'the_web_platform.png',
-      addedOn: '2018/06/07',
+      // addedOn: '2018/06/07',
     },
     {
       episode: 'Speak(easy)',
