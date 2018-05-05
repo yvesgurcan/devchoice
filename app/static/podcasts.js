@@ -14,7 +14,7 @@ window.data = {
       addedOn: '2018/06/12',
     },
     {
-      addedOn: '2018/06/05',
+      addedOn: '2018/06/07',
     },
     {
       episode: 'Speak(easy)',
@@ -22,8 +22,15 @@ window.data = {
       description: 'Just got an opportunity for a talk? Never talked in front of an audience before? This episode of FEHH is for you!',
       url: 'https://soundcloud.com/front-end-happy-hour/speakeasy',
       image: 'front_end_happy_hour.jpg',
-      addedOn: '2018/05/31',
+      addedOn: '2018/06/05',
     },
+    {
+      episode: 'What does a C.E.O. actually do?',
+      name: 'Freakonomics Radio',
+      description: 'The first episode of this Freakonomics Radio 5-part series asks current and former top-company leaders such as Mark Zuckerberg, Satya Nadella, Carol Bratz, Ellen Pao, and others to define what it means to be a C.E.O.',
+      url: 'http://freakonomics.com/podcast/c-e-o-actually/',
+      addedOn: '2018/05/31',
+    }, 
     {
       episode: 'Ellie!',
       name: 'Elm Town',
@@ -50,7 +57,7 @@ window.data = {
     {
       episode: 'Michael Feathers on Legacy Code',
       name: 'Software Engineering Radio',
-      description: 'What does legacy code mean? Explore this question with this show by SE Radio.',
+      description: 'What does legacy code mean? Explore this question with this episode from SE Radio.',
       url: 'http://www.se-radio.net/2017/06/se-radio-episode-295-michael-feathers-on-legacy-code/',
       addedOn: '2018/05/15',
     },
