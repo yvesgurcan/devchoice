@@ -14,7 +14,12 @@ window.data = {
       addedOn: '2018/06/12',
     },
     {
-      addedOn: '2018/06/05',
+      episode: 'React 16 - Fiber and Beyond',
+      name: 'The Web Platform Podcast',
+      description: 'Are you up-to-date with what changed with the latest stable release of React? If not, listen to one of the core contributors of the famous Facebook JavaScript library in this episode of TWPP.',
+      url: 'https://thewebplatformpodcast.com/156-react-16-fiber-and-beyond',
+      image: 'the_web_platform.png',
+      addedOn: '2018/06/07',
     },
     {
       episode: 'Speak(easy)',
@@ -22,6 +27,14 @@ window.data = {
       description: 'Just got an opportunity for a talk? Never talked in front of an audience before? This episode of FEHH is for you!',
       url: 'https://soundcloud.com/front-end-happy-hour/speakeasy',
       image: 'front_end_happy_hour.jpg',
+      addedOn: '2018/06/05',
+    },
+    {
+      episode: 'What does a C.E.O. actually do?',
+      name: 'Freakonomics Radio',
+      description: 'The first episode of this Freakonomics Radio 5-part series asks current and former top-company leaders such as Mark Zuckerberg, Satya Nadella, Carol Bratz, Ellen Pao, and others to define what it means to be a C.E.O.',
+      url: 'http://freakonomics.com/podcast/c-e-o-actually/',
+      image: 'freakonomics_radio.png',
       addedOn: '2018/05/31',
     },
     {
@@ -50,7 +63,7 @@ window.data = {
     {
       episode: 'Michael Feathers on Legacy Code',
       name: 'Software Engineering Radio',
-      description: 'What does legacy code mean? Explore this question with this show by SE Radio.',
+      description: 'What does legacy code mean? Explore this question with this episode from SE Radio.',
       url: 'http://www.se-radio.net/2017/06/se-radio-episode-295-michael-feathers-on-legacy-code/',
       addedOn: '2018/05/15',
     },
@@ -102,4 +115,4 @@ window.data = {
       addedOn: '2018/04/24',
     },
   ],
-}
+};
