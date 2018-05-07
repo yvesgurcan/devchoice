@@ -16,6 +16,7 @@ window.data = {
       episode: 'Vue.js anti-patterns (and how to avoid them)',
       name: 'Full Stack Radio',
       description: 'An interesting discussion on what to do and what not to do when writing apps with the hot new JavaScript library Vue.',
+      url: 'http://www.fullstackradio.com/87',
       image: 'full_stack_radio.jpg',
       addedOn: '2018/06/12',
     },
