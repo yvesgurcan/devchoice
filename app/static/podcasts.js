@@ -13,10 +13,14 @@ window.data = {
       addedOn: '2018/06/19',
     },
     {
+      episode: 'Vue.js anti-patterns (and how to avoid them)',
+      name: 'Full Stack Radio',
+      description: 'An interesting discussion on what to do and what not to do when writing apps with the hot new JavaScript library Vue.',
+      image: 'full_stack_radio.jpg',
       addedOn: '2018/06/12',
     },
     {
-      episode: 'React 16 - Fiber and Beyond',
+      episode: 'React 16 - fiber and beyond',
       name: 'The Web Platform Podcast',
       description: 'Are you up-to-date with what changed with the latest stable release of React? If not, listen to one of the core contributors of the famous Facebook JavaScript library in this episode of TWPP.',
       url: 'https://thewebplatformpodcast.com/156-react-16-fiber-and-beyond',
@@ -47,7 +51,7 @@ window.data = {
       addedOn: '2018/05/29',
     },
     {
-      episode: 'Ionic & Web Component',
+      episode: 'Ionic & web component',
       name: 'The Web Platform Podcast',
       description: 'A good intro to the Ionic framework and what web components are.',
       url: 'https://thewebplatformpodcast.com/133-ionic-web-components',
@@ -63,14 +67,14 @@ window.data = {
       addedOn: '2018/05/17',
     },
     {
-      episode: 'Michael Feathers on Legacy Code',
+      episode: 'Michael Feathers on legacy code',
       name: 'Software Engineering Radio',
       description: 'What does legacy code mean? Explore this question with this episode from SE Radio.',
       url: 'http://www.se-radio.net/2017/06/se-radio-episode-295-michael-feathers-on-legacy-code/',
       addedOn: '2018/05/15',
     },
     {
-      episode: 'Another Day in the Life of a Netflix Engineer',
+      episode: 'Another day in the life of a Netflix engineer',
       name: 're:Invent 2016',
       description: 'This is a classic talk from 2016 all about Netflix. If you haven\'t heard it yet, here is your chance!',
       url: 'https://www.youtube.com/watch?v=aWgtRKfrtMY',
@@ -93,7 +97,7 @@ window.data = {
       addedOn: '2018/05/03',
     },
     {
-      episode: '23 Years of Ruby with Yukihiro Matsumoto',
+      episode: '23 years of Ruby with Yukihiro Matsumoto',
       name: 'The Changelog',
       description: 'If you ever wondered how Ruby was invented, this show is for you! The creator of the famous OOP language himself talks about how everything started.',
       url: 'https://changelog.com/podcast/202',
@@ -109,7 +113,7 @@ window.data = {
       addedOn: '2018/04/26',
     },
     {
-      episode: 'React: The Big Picture',
+      episode: 'React: The big picture',
       name: 'JavaScript Jabber',
       description: 'A great show to put React in perspective. The guests also compare the Facebook library with Vue and Angular.',
       url: 'https://devchat.tv/js-jabber/jsj-304-react-the-big-picture',
