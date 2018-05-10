@@ -1,5 +1,17 @@
 /* make sure to edit /app/static/podcasts.js and not /static/podcasts.js */
 
+/*
+// template
+   {
+     episode: '',
+     name: '',
+     description: '',
+     url: '',
+     image: '',
+     addedOn: '',
+   }
+*/
+
 window.data = {
   ...window.data,
   podcasts: [
@@ -60,10 +72,10 @@ window.data = {
       addedOn: '2018/05/22',
     },
     {
-      episode: 'Interviews with VPs and Hiring a Tester',
+      episode: 'Working from home without rotting and Meetup etiquette',
       name: 'Soft Skills Engineering',
-      description: 'A quick approach on what to say or not to say during a job interview.',
-      url: 'https://softskills.audio/2018/04/06/episode-104-interviews-with-vps-and-hiring-a-tester/',
+      description: 'A hilarious episode where the hosts touch on the subject of work from home (and their total lack of intrapersonal skill) and the awkwardness of jumping into conversations at meetups.',
+      url: 'https://softskills.audio/2018/04/22/episode-106-working-from-home-without-rotting-and-meetup-etiquette/',
       image: 'soft_skills_engineering.png',
       addedOn: '2018/05/17',
     },
