@@ -22,6 +22,11 @@ window.data = {
       addedOn: '2018/06/26',
     },
     {
+      episode: 'Funding with Grants',
+      name: 'Pusuit Podcast',
+      description: 'Listen to this short episode for tips on how to write grant applications and get funding for your tech projects.',
+      url: 'http://pursuit.tech/2018/05/08/funding-with-grants-danielle-robinson/',
+      image: 'pursuit_podcast.jpg',
       addedOn: '2018/06/19',
     },
     {
