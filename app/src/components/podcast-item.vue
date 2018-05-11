@@ -22,7 +22,7 @@
               </div>
           </div>
           <div class="button-container">
-              <button-link label="Listen now" :href=podcast.url target="_blank" />
+              <button-link label="Listen now" :href=podcast.link target="_blank" />
               <button-link label="More like this" route=true :href="
               '/' +
               nameUrlified + '/'
