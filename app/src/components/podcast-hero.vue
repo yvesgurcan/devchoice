@@ -19,7 +19,7 @@
             {{ featuredPodcast.description }}
           </div>
           <div class="button-container">
-            <button-link label="Listen now" :href=featuredPodcast.url target="_blank" />
+            <button-link label="Listen now" :href=featuredPodcast.link target="_blank" />
             <button-link label="More like this" route=true :href="
               '/' +
               nameUrlified + '/'
