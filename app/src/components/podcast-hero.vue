@@ -2,7 +2,7 @@
     <div class="podcast-hero" ref="featuredPodcast">
       <div class="content">
         <div class="image">
-          <a :href=featuredPodcast.url target="_blank">
+          <a :href=featuredPodcast.link target="_blank">
            <img v-if=featuredPodcast.image :src="'static/images/' + featuredPodcast.image" />
           </a>
         </div>
