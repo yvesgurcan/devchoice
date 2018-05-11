@@ -20,13 +20,13 @@ export default {
     const featuredPodcast = window.data.podcasts
       .filter(podcast => debug || !podcast.hidden)
       .filter(podcast => debug || !podcast.addedOn || new Date() > new Date(podcast.addedOn))
-      .filter(podcast => podcast.url)[0];
+      .filter(podcast => podcast.link)[0];
 
     const podcasts = window.data.podcasts
       .filter(podcast => podcast !== featuredPodcast)
       .filter(podcast => debug || !podcast.hidden)
       .filter(podcast => debug || !podcast.addedOn || new Date() > new Date(podcast.addedOn))
-      .filter(podcast => podcast.url);
+      .filter(podcast => podcast.link);
 
     return {
       featuredPodcast,
