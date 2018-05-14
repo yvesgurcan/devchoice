@@ -23,7 +23,7 @@ layout: null
   <sy:updatePeriod>{{ site.feed.updatePeriod }}</sy:updatePeriod>
   <sy:updateFrequency>{{ site.feed.updateFrequency }}</sy:updateFrequency>
   <generator>http://jekyllrb.com</generator>
-  <itunes:summary>{{ site.description }}</itunes:summary>
+  <itunes:summary>{{ site.description | cdata_escape }}</itunes:summary>
   <itunes:author>{{ site.author }}</itunes:author>
   <itunes:explicit>{{ site.feed.explicit }}</itunes:explicit>
   <itunes:image href="{{ site.feed.logo />
