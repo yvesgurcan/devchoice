@@ -6,7 +6,7 @@ feed:
   updatePeriod: daily // can be hourly, daily, weekly, monthly, yearly
   updateFrequency: 1 // this number goes with updatePeriod (for example: 'weekly' and '2' means that the podcast is updated every other week)
   explicit: no // can be yes, no, clean
-  logo: https://devchoice.yvesgurcan.com/images/devhoice.png // expects a URL
+  logo: https://devchoice.yvesgurcan.com/assets/images/devchoice.png // expects a URL
   
 
 collections:
