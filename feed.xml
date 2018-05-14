@@ -42,7 +42,7 @@ layout: null
     <itunes:category text="{{ site.feed.subcategory1 }}" />
     <itunes:category text="{{ site.feed.subcategory2 }}" />
   </itunes:category>
-  {% for show in site.podcasts %}
+  {% for show in site.podcasts reversed %}
     <item>
       <title><![CDATA[{{ show.episode }}]]></title>
       <link>{{ show.link }}</link>
