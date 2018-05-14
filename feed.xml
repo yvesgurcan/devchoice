@@ -44,7 +44,7 @@ layout: null
   </itunes:category>
   {% for show in site.podcasts %}
     <item>
-      <title><![CDATA[{{ show.episode }}]></title>
+      <title><![CDATA[{{ show.episode }}]]></title>
       <link>{{ show.link }}</link>
       <!-- <comments>{{ site.url }}{{ ep.url }}#comments</comments> -->
       <!-- <pubDate>{{ ep.date | date: "%a, %d %b %Y %T %z" }}</pubDate> -->
