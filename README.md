@@ -43,6 +43,8 @@ The site assumes that the image can be found locally at `/assets/images/the-name
 
 #### length
 
+Length in bytes of the media file.
+
 #### duration
 
 #### type

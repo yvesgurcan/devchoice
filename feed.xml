@@ -60,7 +60,7 @@ layout: null
           <![CDATA[{{ show.notes | cdata_escape }}]]>
         </content:encoded> -->
       {% endif %}
-      <enclosure url="{{ show.link }}" length="{{ show.length }}" type="audio/mpeg" />
+      <enclosure url="{{ show.media }}" length="{{ show.length }}" type="{% if media %}audio/mpeg{% endif %}" />
       <itunes:subtitle><![CDATA[{{ show.description | cdata_escape }}]]></itunes:subtitle>
       <itunes:summary><![CDATA[{{ show.description | cdata_escape }}]]></itunes:summary>
       <itunes:author>{{ show.name }}</itunes:author>
