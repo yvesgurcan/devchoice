@@ -1,6 +1,8 @@
 name: devchoice
 description: a new tech-related podcast recommendation every Tuesday and Thursday
 author: Yves Gurcan
+email: gurcan.yves@gmail.com
+timezone: America/Los_Angeles
 
 feed:
   updatePeriod: daily #can be hourly, daily, weekly, monthly, yearly
