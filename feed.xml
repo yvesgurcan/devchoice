@@ -52,9 +52,6 @@ layout: null
       {% for category in ep.categories %}
         <!-- <category><![CDATA[{{ category | cdata_escape }}]]></category> -->
       {% endfor %}
-      {% for category in ep.tags %}
-        <!-- <category><![CDATA[{{ category | cdata_escape }}]]></category> -->
-      {% endfor %}
       <guid isPermaLink="true">{{ show.link }}</guid>
       <description>
         <![CDATA[{{ show.description | cdata_escape }}]]>
