@@ -28,7 +28,7 @@ notes: full_show_notes
 #### Special values
 
 The following keys are internal to Jekyll and should not be overriden in the front matter:
-* name
+* title
 
 #### hidden
 
