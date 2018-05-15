@@ -16,12 +16,19 @@ ext: file_extension_of_the_locally_hosted_image
 image: url_of_remotely_hosted_image
 categories: [an, array, of, categories]
 length: 
-type: the_type_of_the_file
+media: url_of_the_media_file
+type: the_type_of_the_media_file
 explicit: is_the_show_explicit
+notes: full_show_notes
 ---
 ```
 
 ### Details about front matter keys
+
+#### Special values
+
+The following keys are internal to Jekyll and should not be overriden in the front matter:
+* name
 
 #### hidden
 
