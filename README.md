@@ -14,7 +14,6 @@ description: short_description
 link: url_to_episode_page
 ext: file_extension_of_the_locally_hosted_image
 image: url_of_remotely_hosted_image
-categories: [an, array, of, categories]
 length: 
 media: url_of_the_media_file
 type: the_type_of_the_media_file
@@ -53,3 +52,10 @@ The default value of `type` is `audio/mpeg`.
 #### explicit
 The default value of `explicit` is `no`.
 The `explicit` key has 3 valid values for iTunes: `no`, `yes`, `clean` (which corresponds to the censored version of an explicit show).
+
+### Customized behaviors
+
+Some of the fields and the logic to populate them in the feed is implied. Here are more details about these custom behaviors that are not traditional to usual podcast feeds:
+
+* each episode get their `author` from the `podcast` key
+* if the `podcast` key is missing, the `author` field is derived from `episode`
