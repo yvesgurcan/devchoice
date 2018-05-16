@@ -25,7 +25,7 @@ layout: null
   <generator>http://jekyllrb.com</generator>
   <itunes:summary>{{ site.description }}</itunes:summary>
   <itunes:author>{{ site.author }}</itunes:author>
-  <itunes:explicit>{{ site.feed.explicit }}</itunes:explicit>
+  <itunes:explicit>{% if site.feed.explicit % }{{ site.feed.explicit }}{% else %}no{% endif %}</itunes:explicit>
   <itunes:image href="{{ site.feed.logo }}"/>
   <itunes:owner>
     <itunes:name>{{ site.author }}</itunes:name>
@@ -64,7 +64,7 @@ layout: null
       <itunes:subtitle><![CDATA[{{ show.description | cdata_escape }}]]></itunes:subtitle>
       <itunes:summary><![CDATA[{{ show.description | cdata_escape }}]]></itunes:summary>
       <itunes:author>{% if show.podcast %}{{ show.podcast }}{% else if show.episode %}{{ show.episode }}{% endif %}</itunes:author>
-      <itunes:image href="{% if show.image %}{{ show.image }}{% else %}{{ site.url }}{{ show.url | remove: 'html' }}{% if show.ext %}{{ show.ext }}{% else %}jpg{% endif %}{% endif %}" />
+      <itunes:image href="{% if show.image %}{{ show.image }}{% else %}{{ site.url }}{{ show.url | remove: 'html' }}{% if show.imgExt %}{{ show.imgExt }}{% else %}jpg{% endif %}{% endif %}" />
       <itunes:explicit>{% if show.explicit %}{{ show.explicit }}{% else %}no{% endif %}</itunes:explicit>
       <itunes:duration>{{ show.duration }}</itunes:duration>
     </item>
