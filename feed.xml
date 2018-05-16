@@ -66,7 +66,7 @@ layout: null
       <enclosure url="{{ show.media }}" length="{{ show.length }}" type="{% if media %}audio/mpeg{% endif %}" />
       <itunes:subtitle><![CDATA[{{ show.description | cdata_escape }}]]></itunes:subtitle>
       <itunes:summary><![CDATA[{{ show.description | cdata_escape }}]]></itunes:summary>
-      <itunes:author>{{ show.name }}</itunes:author>
+      <itunes:author>{{ show.podcast }}</itunes:author>
       <!-- <itunes:image href="{{ site.url }}{{ site.podcast_album_art }}" /> -->
       <itunes:explicit>{{ show.explicit }}</itunes:explicit>
       <itunes:duration>{{ show.duration }}</itunes:duration>
