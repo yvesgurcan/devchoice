@@ -5,5 +5,5 @@ description: We're diving way back in time with this 3-part interview. John Rome
 link: http://appletimewarp.libsyn.com/?search=nasir+gebelli
 media: http://traffic.libsyn.com/appletimewarp/Apple_Time_Warp_Podcast_-_Episode_3_-_Edited.m4a
 type: audio/x-m4a
-image: apple_time_warp.jpg
+imgExt: jpg
 ---
