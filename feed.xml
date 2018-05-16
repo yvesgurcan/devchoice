@@ -45,7 +45,7 @@ layout: null
   {% for show in site.podcasts reversed %}
     {% assign date = show.path | remove: "_podcasts/" | slice: 0, 10 | date: "%s" %}
     {% assign today = 'now' | date: '%s' %}
-    {% if date <= today  %}
+    {% if today >= date  %}
     <item>
       <title><![CDATA[{{ show.episode }}]]></title>
       <link>{{ show.link }}</link>
