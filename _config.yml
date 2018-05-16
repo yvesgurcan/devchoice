@@ -9,6 +9,9 @@ feed:
   updateFrequency: 1 #this number goes with updatePeriod (for example: 'weekly' and '2' means that the podcast is updated every other week)
   explicit: no #can be yes, no, clean
   logo: https://devchoice.yvesgurcan.com/assets/images/devchoice.png #expects a URL
+  category: Technology
+  subcategory1: null
+  subcategory2: null
   
 
 collections:
