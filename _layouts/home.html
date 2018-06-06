@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>jekyll</title>
+        <title>devchoice</title>
+        <link rel="stylesheet" href="/css/app.css" type="text/css">
     </head>
     <body>
         <div id="main">
-            {% for podcast in site.podcasts | reverse %}
+            {% for podcast in site.podcasts reversed %}
                 {% unless podcast.hidden %}
                 {% assign date = podcast.date | date: '%s' %}
                 {% if now >= date %}
@@ -35,8 +36,8 @@
                             </div>
                         </div>
                         <div class="button-container">
-                            <a href="{{ podcast.link }}" target="_blank" />Listen now</a>
-                            <a href="//">More like this</a>
+                            <a class="button" href="{{ podcast.link }}" target="_blank" />Listen now</a>
+                            <a class="button" href="//">More like this</a>
                         </div>
                     </div>
                 </div>
