@@ -8,7 +8,7 @@
         <div id="main">
             {% for podcast in site.podcasts | reverse %}
                 {% unless podcast.hidden %}
-                {% assign date = post.date | date: '%s' %}
+                {% assign date = podcast.date | date: '%s' %}
                 {% if now >= date %}
                 <div class="podcast-item" ref="podcast">
                     <div class="wrapper">
