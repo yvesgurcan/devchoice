@@ -1,3 +1,4 @@
+{% assign now = site.time | date: '%s' %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,12 +6,13 @@
     </head>
     <body>
         <div id="main">
-            {% for podcast in site.podcasts | reversed %}
+            {% for podcast in site.podcasts | reverse %}
                 {% unless podcast.hidden %}
+                {% assign date = post.date | date: '%s' %}
+                {% if now >= date %}
                 <div class="podcast-item" ref="podcast">
                     {{ podcast.path }}
                     <div class="wrapper">
-                        {{ podcast.date }}xx
                         <div class="content">
                             <div class="image">
                                 {% if podcast.image %}
@@ -39,6 +41,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endunless %}
             {% endfor %}
         </div>
