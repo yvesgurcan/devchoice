@@ -5,9 +5,12 @@
     </head>
     <body>
         <div id="main">
-            {% for podcast in site.podcasts %}
+            {% for podcast in site.podcasts | reversed %}
+                {% unless podcast.hidden %}
                 <div class="podcast-item" ref="podcast">
+                    {{ podcast.path }}
                     <div class="wrapper">
+                        {{ podcast.name }}
                         <div class="content">
                             <div class="image">
                                 {% if podcast.image %}
@@ -36,6 +39,7 @@
                         </div>
                     </div>
                 </div>
+                {% endunless %}
             {% endfor %}
         </div>
     </body>
