@@ -30,14 +30,6 @@ window.data = {
       addedOn: '2018/06/19',
     },
     {
-      episode: 'Vue.js anti-patterns (and how to avoid them)',
-      name: 'Full Stack Radio',
-      description: 'An interesting discussion on what to do and what not to do when writing apps with the hot new JavaScript library Vue.',
-      link: 'http://www.fullstackradio.com/87',
-      image: 'full_stack_radio.jpg',
-      addedOn: '2018/06/12',
-    },
-    {
       episode: 'React 16 - fiber and beyond',
       name: 'The Web Platform Podcast',
       description: 'Are you up-to-date with what changed with the latest stable release of React? If not, listen to one of the core contributors of the famous Facebook JavaScript library in this episode of TWPP.',
@@ -62,11 +54,19 @@ window.data = {
       addedOn: '2018/05/31',
     },
     {
+      episode: 'Vue.js anti-patterns (and how to avoid them)',
+      name: 'Full Stack Radio',
+      description: 'An interesting discussion on what to do and what not to do when writing apps with the hot new JavaScript library Vue.',
+      link: 'http://www.fullstackradio.com/87',
+      image: 'full_stack_radio.jpg',
+      addedOn: '2018/05/28',
+    },
+    {
       episode: 'Ellie!',
       name: 'Elm Town',
       description: 'If you played with Elm, you probably used Ellie to share your code a la JSFiddle. Did you know that Ellie\'s compiler run client-side? Listen to this show to find out more about this awesome tool.',
       link: 'https://elmtown.audio/3bdfc092',
-      addedOn: '2018/05/29',
+      addedOn: '2018/05/24',
     },
     {
       episode: 'Ionic & web component',
