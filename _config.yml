@@ -18,3 +18,8 @@ collections:
   podcasts:
     output: true
   
+defaults:
+  - scope:
+    type: podcasts
+  values:
+    layout: related

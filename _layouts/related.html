@@ -1,0 +1,32 @@
+<div class="podcast-hero">
+  <div class="content">
+    <div class="image">
+      {% if page.image %}
+      <a href="{{ page.url }}" target="_blank">
+        {% if page.image contains '://' %}
+        <img src="{{ page.image }}" />
+        {% else %}
+        <img src="/images/{{ page.image }}" />
+        {% endif %}
+      </a>
+      {% endif %}
+    </div>
+    <div>
+      <h3>
+        <a href="?a=">
+        {{ page.episode }}
+        </a>
+      </h3>
+      <div class="page-name">
+        {{ page.name }}
+      </div>
+      <div class="page-description">
+        {{ page.description }}
+      </div>
+      <div class="button-container">
+        <a class="button" href="{{ page.link }}" target="_blank">Listen now</a>
+        <a class="button" href="/">See all</a>
+      </div>
+    </div>
+  </div>
+</div>
