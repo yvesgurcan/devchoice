@@ -19,8 +19,9 @@ collections:
     output: true
   
 defaults:
-  - scope:
-    path: ""
-    type: podcasts
-  values:
-    layout: related
+  - 
+    scope:
+      path: ""
+      type: podcasts
+    values:
+      layout: related
