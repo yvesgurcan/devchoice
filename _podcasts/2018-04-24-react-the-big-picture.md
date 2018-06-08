@@ -7,4 +7,3 @@ link: https://devchat.tv/js-jabber/jsj-304-react-the-big-picture
 media: https://media.devchat.tv/my-js-story/MJS_052_Jeremy_Likness.mp3
 image: javascript_jabber.jpg
 ---
-hi!?
