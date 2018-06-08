@@ -9,48 +9,56 @@
     <body>
         <div id="main">
             {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
-                {% if first %}
-                    <div class="podcast-hero">
-                        <div class="content">
-                            <div class="image">
-                                {% if podcast.image %}
-                                <a href="{{ podcast.url }}" target="_blank">
-                                    <img src="static/images/{{ podcast.image }}" />
-                                </a>
-                                {% endif %}
-                            </div>
-                            <div>
-                                <h3>
-                                    <a href="?a=">
-                                    {{ podcast.episode }}
-                                    </a>
-                                </h3>
-                                <div class="podcast-name">
-                                    {{ podcast.name }}
-                                </div>
-                                <div class="podcast-description">
-                                    {{ podcast.description }}
-                                </div>
-                                <div class="button-container">
-                                    <a class="button" href="{{ podcast.link }}" target="_blank">Listen now</a>
-                                    <a class="button" href="//">More like this</a>
-                                </div>
-                            </div>
+            {% if first %}
+            <div class="podcast-hero">
+                <div class="content">
+                    <div class="image">
+                        {% if podcast.image %}
+                        <a href="{{ podcast.url }}" target="_blank">
+                            {% if podcast.image contains '://' %}
+                            <img src="{{ podcast.image }}" />
+                            {% else %}
+                            <img src="/images/{{ podcast.image }}" />
+                            {% endif %}
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h3>
+                            <a href="?a=">
+                            {{ podcast.episode }}
+                            </a>
+                        </h3>
+                        <div class="podcast-name">
+                            {{ podcast.name }}
+                        </div>
+                        <div class="podcast-description">
+                            {{ podcast.description }}
+                        </div>
+                        <div class="button-container">
+                            <a class="button" href="{{ podcast.link }}" target="_blank">Listen now</a>
+                            <a class="button" href="//">More like this</a>
                         </div>
                     </div>
-                {% assign first = false %}
-                {% else %}
-                {% if second %}
-                    <div class="podcast-list">
-                    {% assign second = false %}
-                {% endif %}
+                </div>
+            </div>
+            {% assign first = false %}
+            {% else %}
+            {% if second %}
+            <div class="podcast-list">
+            {% assign second = false %}
+            {% endif %}
                 <div class="podcast-item" ref="podcast">
                     <div class="wrapper">
                         <div class="content">
                             <div class="image">
                                 {% if podcast.image %}
                                 <a href="{{ podcast.url }}" target="_blank">
-                                    <img src="static/images/{{ podcast.image }}" />
+                                    {% if podcast.image contains '://' %}
+                                    <img src="{{ podcast.image }}" />
+                                    {% else %}
+                                    <img src="/images/{{ podcast.image }}" />
+                                    {% endif %}
                                 </a>
                                 {% endif %}
                             </div>
@@ -74,9 +82,9 @@
                         </div>
                     </div>
                 </div>
-                {% if second %}
-                    </div>
-                {% endif %}
+            {% if second %}
+            </div>
+            {% endif %}
             {% endif %}{% endif %}{% endunless %}{% endfor %}
         </div>
     </body>
