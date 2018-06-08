@@ -20,6 +20,7 @@ collections:
   
 defaults:
   - scope:
+    path: ''
     type: podcasts
   values:
     layout: related
