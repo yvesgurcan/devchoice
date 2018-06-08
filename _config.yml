@@ -17,6 +17,4 @@ feed:
 collections:
   podcasts:
     output: true
-  images:
-    output: true
   
