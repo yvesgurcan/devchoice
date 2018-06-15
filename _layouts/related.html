@@ -6,7 +6,7 @@
       {% include header.html %}
     </head>
     <body>
-      {% include podcast_hero.html podcast=page %}
+      {% include podcast_hero.html podcast=page more=false %}
       {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
       {% if second %}
       <div class="podcast-list">

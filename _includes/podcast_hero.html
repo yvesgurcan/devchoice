@@ -1,20 +1,20 @@
-<a name="{{ podcast.permalink }}"></a>
+<a name="{{ include.podcast.permalink }}"></a>
 <div class="podcast-hero">
   <div class="content">
     <div class="image">
       {% if include.podcast.image %}
-      <a href="{{ podcast.url }}" target="_blank">
+      <a href="{{ include.podcast.url }}" target="_blank">
         {% if include.podcast.image contains '://' %}
-        <img src="{{ podcast.image }}" />
+        <img src="{{ include.podcast.image }}" />
         {% else %}
-        <img src="/images/{{ podcast.image }}" />
+        <img src="/images/{{ include.podcast.image }}" />
         {% endif %}
       </a>
       {% endif %}
     </div>
     <div>
       <h3>
-        <a href="#{{ podcast.permalink }}">
+        <a href="#{{ include.podcast.permalink }}">
         {{ include.podcast.episode }}
         </a>
       </h3>
@@ -25,8 +25,12 @@
         {{ include.podcast.description }}
       </div>
       <div class="button-container">
-        <a class="button" href="{{ podcast.link }}" target="_blank">Listen now</a>
-        <a class="button" href="{{ podcast.permalink }}">More like this</a>
+        <a class="button" href="{{ include.podcast.link }}" target="_blank">Listen now</a>
+        {% if include.more %}
+        <a class="button" href="{{ include.podcast.permalink }}">More like this</a>
+        {% else if %}
+        <a class="button" href="/v2/">See all</a>
+        {% endif %}
       </div>
     </div>
   </div>

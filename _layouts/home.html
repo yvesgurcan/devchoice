@@ -11,7 +11,7 @@
         <div id="main">
             {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
             {% if first %}
-            {% include podcast_hero.html podcast=podcast %}
+            {% include podcast_hero.html podcast=podcast more=true %}
             {% assign first = false %}
             {% else %}
             {% if second %}
