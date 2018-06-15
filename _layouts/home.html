@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="/styles/shared.css?v1.0" type="text/css">
     </head>
     <body>
+        {% include branding_top.html %}
+        {% include titling.html %}
         <div id="main">
             {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
             {% if first %}
@@ -89,5 +91,6 @@
             {% endif %}
             {% endif %}{% endif %}{% endunless %}{% endfor %}
         </div>
+        {% include branding_bottom.html %}
     </body>
 </html>
