@@ -1,5 +1,6 @@
 ---
 ---
-{% for podcast in site.podcasts reversed %}
-  Show: {{ podcast.podcast }}
-{% endfor %}
+      <h4>Shows</h4>
+      {% for podcast in site.podcasts reversed %}
+      {{ podcast.podcast }}
+      {% endfor %}
