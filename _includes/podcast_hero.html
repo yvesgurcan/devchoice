@@ -2,9 +2,9 @@
 <div class="podcast-hero">
   <div class="content">
     <div class="image">
-      {% if podcast.image %}
+      {% if include.podcast.image %}
       <a href="{{ podcast.url }}" target="_blank">
-        {% if podcast.image contains '://' %}
+        {% if include.podcast.image contains '://' %}
         <img src="{{ podcast.image }}" />
         {% else %}
         <img src="/images/{{ podcast.image }}" />
@@ -15,14 +15,14 @@
     <div>
       <h3>
         <a href="#{{ podcast.permalink }}">
-        {{ podcast.episode }}
+        {{ include.podcast.episode }}
         </a>
       </h3>
       <div class="podcast-name">
-        {{ podcast.podcast }}
+        {{ include.podcast.podcast }}
       </div>
       <div class="podcast-description">
-        {{ podcast.description }}
+        {{ include.podcast.description }}
       </div>
       <div class="button-container">
         <a class="button" href="{{ podcast.link }}" target="_blank">Listen now</a>
