@@ -7,7 +7,7 @@
    <p>Redirecting...</p>
    <a id="redirect" href="http://devchoice.yvesgurcan.com/v2/">Click here to browse to the page manually.</a>
    <script>
-     document.getElementById('redirect').src = document.getElementById('redirect').src + window.location.hash;
+     document.getElementById('redirect').href = document.getElementById('redirect').href + window.location.hash;
      console.log(window.location.hash);
      // window.location = 'http://devchoice.yvesgurcan.com/v2/' + window.location.hash;
    </script>
