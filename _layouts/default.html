@@ -1,0 +1,14 @@
+{% assign now = site.time | date: '%s' %}{% assign first = true %}{% assign second = true %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ site.name }}</title>
+    {% include header.html %}
+  </head>
+  <body>
+    {% include branding_top.html %}
+    {% include titling.html %}
+    {{ content }}
+    {% include branding_bottom.html %}
+  </body>
+</html>
