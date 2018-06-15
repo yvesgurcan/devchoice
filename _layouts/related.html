@@ -6,6 +6,8 @@
       {% include header.html %}
     </head>
     <body>
+      {% include branding_top.html %}
+      {% include titling.html %}
       {% include podcast_hero.html podcast=page more=false %}
       {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
       {% if second %}
