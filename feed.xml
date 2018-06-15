@@ -47,7 +47,7 @@ layout: null
     {% assign today = 'now' | date: '%s' %}
     {% if today >= date and show.hidden != true  %}
     <item>
-      <title><![CDATA[{{ show.episode }}]]></title>
+      <title><![CDATA[{{ show.episode }}]]> - <![CDATA[{{ show.podcast }}]]></title>
       <link>{{ show.link }}</link>
       <pubDate>{{ date | date: "%a, %d %b %Y %T %z" }}</pubDate>
       <dc:creator><![CDATA[{{ show.name | cdata_escape }}]]></dc:creator>
