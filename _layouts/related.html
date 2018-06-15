@@ -7,7 +7,7 @@
     </head>
     <body>
       {% capture podcast %}{{ page }}{% endcapture %}
-      {% include podcast_hero.html podcast=page %}
+      {% include podcast_hero.html podcast=podcast %}
       {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
       {% if second %}
       <div class="podcast-list">
