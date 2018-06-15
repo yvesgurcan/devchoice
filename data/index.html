@@ -1,3 +1,5 @@
 ---
 ---
-YAY!
+{% for podcast in site.podcasts reversed %}
+  Show: {{ podcast.podcast }}
+{% endfor }

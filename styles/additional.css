@@ -2,3 +2,7 @@ header {
   padding-top: 50px;
   text-align: center;
 }
+
+#main {
+  min-height: 90vh;
+}
