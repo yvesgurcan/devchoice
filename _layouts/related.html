@@ -3,25 +3,25 @@
 <html>
   <head>
       <title>{{ page.title }} - {{ site.name }}</title>
-      {% include header.html %}
+{% include header.html %}
     </head>
     <body>
-      {% include branding_top.html %}
-      {% include titling.html %}
+{% include branding_top.html %}
+{% include titling.html %}
       <div id="main">
-        {% include podcast_hero.html podcast=page more=false %}
-        {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
-        {% if second %}
+{% include podcast_hero.html podcast=page more=false %}
+{% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
+{% if second %}
         <div class="podcast-list">
-        {% assign second = false %}
-        {% endif %}
-          {% include podcast_card.html podcast=podcast %}
-        {% if second %}
+{% assign second = false %}
+{% endif %}
+  {% include podcast_card.html podcast=podcast %}
+{% if second %}
         </div>
-        {% endif %}
-        {% endif %}{% endunless %}{% endfor %}
+{% endif %}
+{% endif %}{% endunless %}{% endfor %}
       </div>
-      {% include branding_bottom.html %}
+{% include branding_bottom.html %}
       </div>
   </body>
 </html>
