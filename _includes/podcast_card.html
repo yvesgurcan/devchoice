@@ -1,35 +1,35 @@
 <a name="{{ podcast.permalink }}"></a>
 <div class="podcast-item">
-    <div class="wrapper">
-        <div class="content">
-            <div class="image">
-                {% if podcast.image %}
-                <a href="{{ podcast.url }}" target="_blank">
-                    {% if podcast.image contains '://' %}
-                    <img src="{{ podcast.image }}" />
-                    {% else %}
-                    <img src="/images/{{ podcast.image }}" />
-                    {% endif %}
-                </a>
-                {% endif %}
-            </div>
-            <div>
-                <h4>
-                    <a href="#{{ podcast.permalink }}">
-                        {{ podcast.episode }}
-                    </a>
-                </h4>
-                <div class="podcast-name">
-                    {{ podcast.podcast }}
-                </div>
-                <div class="podcast-description">
-                    {{ podcast.description }}
-                </div>
-            </div>
+  <div class="wrapper">
+    <div class="content">
+      <div class="image">
+{% if podcast.image %}
+        <a href="{{ podcast.url }}" target="_blank">
+{% if podcast.image contains '://' %}
+          <img src="{{ podcast.image }}" />
+{% else %}
+          <img src="/images/{{ podcast.image }}" />
+{% endif %}
+        </a>
+{% endif %}
+      </div>
+        <div>
+          <h4>
+            <a href="#{{ podcast.permalink }}">
+              {{ podcast.episode }}
+            </a>
+          </h4>
+          <div class="podcast-name">
+            {{ podcast.podcast }}
+          </div>
+          <div class="podcast-description">
+          {{ podcast.description }}
         </div>
-        <div class="button-container">
-            <a class="button" href="{{ podcast.link }}" target="_blank" />Listen now</a>
-            <a class="button" href="{{ podcast.permalink }}">More like this</a>
-        </div>
+      </div>
     </div>
+    <div class="button-container">
+      <a class="button" href="{{ podcast.link }}" target="_blank" />Listen now</a>
+      <a class="button" href="{{ podcast.permalink }}">More like this</a>
+    </div>
+  </div>
 </div>
