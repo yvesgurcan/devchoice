@@ -11,9 +11,11 @@
     <div id="main">
 {% include podcast_hero.html podcast=page more=false %}
 {% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now >= date %}
+{% if podcast.podcast == page.podcast %}
       {% if second %}<div class="podcast-list">{% assign second = false %}{% endif %}
 {% include podcast_card.html podcast=podcast %}
       {% if second %}</div>{% endif %}{% endif %}{% endunless %}{% endfor %}
+{% endif %}
     </div>
 {% include branding_bottom.html %}
   </body>
