@@ -3,7 +3,7 @@
         <div class="wrapper">
           <div class="content">
             <div class="image">
-              {% if podcast.image %}<a href="{{ podcast.url }}" target="_blank">
+              {% if podcast.image %}<a href="{{ podcast.url }}">
                 {% if podcast.image contains '://' %}<img src="{{ podcast.image }}" />
                 {% else %}<img src="/images/{{ podcast.image }}" />{% endif %}
               </a>{% endif %}
