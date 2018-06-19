@@ -14,8 +14,9 @@
 {% if podcast.podcast == page.podcast %}
       {% if second %}<div class="podcast-list">{% assign second = false %}{% endif %}
 {% include podcast_card.html podcast=podcast %}
-      {% if second %}</div>{% endif %}{% endif %}{% endunless %}{% endfor %}
+      {% if second %}</div>{% endif %}
 {% endif %}
+{% endif %}{% endunless %}{% endfor %}
     </div>
 {% include branding_bottom.html %}
   </body>
