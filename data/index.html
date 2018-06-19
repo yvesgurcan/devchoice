@@ -1,11 +1,11 @@
 ---
 ---
-      <h4>Shows (+ Images)</h4>
+      <h4>Shows / Images</h4>
       <ul>{% for podcast in site.podcasts reversed %}
         <li>{{ podcast.podcast }} ({{ podcast.image }})</li>
       {% endfor %}</ul>
 
-      <h4>Episodes (+ URL)</h4>
+      <h4>Episodes</h4>
       <ul>{% for podcast in site.podcasts reversed %}
         <li>
           {{ podcast.date | date_to_long_string }
