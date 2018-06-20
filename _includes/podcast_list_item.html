@@ -1,0 +1,5 @@
+        <li>
+          {{ podcast.date | date_to_long_string }}:
+          {{ podcast.podcast }} - 
+          <a href="{{ podcast.permalink }}" target="_blank">{{ podcast.episode }}</a>
+        </li>

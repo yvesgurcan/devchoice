@@ -1,10 +1,7 @@
 ---
+layout: list
 ---
-      <h4>Episodes</h4>
+      <h4>All Episodes</h4>
       <ul>{% for podcast in site.podcasts reversed %}
-        <li>
-          {{ podcast.date | date_to_long_string }}:
-          {{ podcast.podcast }} - 
-          <a href="{{ podcast.permalink }}" target="_blank">{{ podcast.episode }}</a>
-        </li>
+        {{ include podcast_list_item.html.html }}
       {% endfor %}</ul>
