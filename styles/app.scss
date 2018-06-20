@@ -1,6 +1,23 @@
 ---
 ---
 
+header {
+    padding-top: 50px;
+    text-align: center;
+}
+
+#main {
+    min-height: 83vh;
+}
+
+.admin-page {
+    padding: 40px;
+}
+
+.admin-menu {
+    padding-bottom: 20px;
+}
+
 .podcast-list {
     display: flex;
     flex-wrap: wrap;
