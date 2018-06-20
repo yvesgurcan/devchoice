@@ -4,4 +4,6 @@ layout: list
 {% assign now = site.time | date: '%s' %}
       <h4>Next Tuesdays and Thursdays</h4>
       {% for weekNumber in (1...50) %}
+        {% if %}<div>Tuesday: </div>
+        {% else %}<div>Thursday: </div>{% endif %}
       {% endfor %}

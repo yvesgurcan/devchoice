@@ -7,7 +7,7 @@ header {
 }
 
 #main {
-    min-height: 83.5vh;
+    min-height: calc(100vh - 158px);
 }
 
 .admin-page {
