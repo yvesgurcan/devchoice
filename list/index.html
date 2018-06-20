@@ -3,5 +3,5 @@ layout: list
 ---
       <h4>All Episodes</h4>
       <ul>{% for podcast in site.podcasts reversed %}
-        {{ include podcast_list_item.html.html }}
+        {{ include podcast_list_item.html podcast=podcast }}
       {% endfor %}</ul>
