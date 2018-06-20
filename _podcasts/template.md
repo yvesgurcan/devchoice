@@ -1,7 +1,7 @@
 ---
 hidden: true
 episode: 
-permalink: /
+permalink: /slug
 podcast: 
 image: .jpg
 description: 
