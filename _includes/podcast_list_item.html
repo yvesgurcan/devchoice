@@ -3,4 +3,5 @@
           {{ podcast.podcast }} - 
           <a href="{{ podcast.permalink }}" target="_blank">{{ podcast.episode }}</a>
           (<a href="/images/{{ podcast.image }}">img</a>)
+          {% if podcast.hidden %}[HIDDEN]{% endif %}
         </li>
