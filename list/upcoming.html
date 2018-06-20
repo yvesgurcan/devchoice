@@ -3,6 +3,6 @@ layout: list
 ---
 {% assign now = site.time | date: '%s' %}
       <h4>Upcoming Episodes</h4>
-      <ul>{% for podcast in site.podcasts reversed %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now < date %}
+      <ul>{% for podcast in site.podcasts %}{% unless podcast.hidden %}{% assign date = podcast.date | date: '%s' %}{% if now < date %}
         {% include podcast_list_item.html podcast=podcast %}
         {% endif %}{% endunless %}{% endfor %}</ul>
