@@ -1,4 +1,5 @@
 ---
+hidden: true
 episode: 
 permalink: /
 podcast: 
