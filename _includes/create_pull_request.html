@@ -6,8 +6,10 @@
     return string.replace(/[\.\/ ~\^\[\]]/g, '-');
   }
 
-  function createPullRequest(event) {
-    event.preventDefault();
+  function createPullRequest(event = undefined) {
+    if (event) {
+      event.preventDefault();      
+    }
     const episode = document.getElementById('episode').value;
     const slug = document.getElementById('permalink').value;
     const podcast = document.getElementById('podcast').value;
@@ -36,13 +38,17 @@
     console.log({data});
 
     // get latest commit
-    fetch('{{ site.github_api }}/git/refs/heads/master')
+    fetch('{{ site.github_api }}/git/refs/heads/master', {
+      headers: {
+        Authorization: 'Basic Z3VyY2FuLnl2ZXMrZ2l0aHViQGdtYWlsLmNvbQ==',
+      }
+    });
 
     // create branch
     /*
     fetch('{{ site.github_api }}/git/refs', {
       ref: `refs/heads/${branch}`,
-    })
+    });
     */
 
     // create PR
@@ -55,4 +61,7 @@
     event.preventDefault();
     createPullRequest(event);
   }, false);
+
+  // debug
+  createPullRequest();
 </script>
