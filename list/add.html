@@ -9,7 +9,11 @@ layout: list
         {% include textarea.html input="description" label="Description" %}
         {% include input.html input="link" label="Link" %}
         {% include input.html input="media" label="Media" %}
-        {% include input.html input="image" label="Image" %}
+        {% include input.html input="image" label="Image" value=".jpg" %}
+        <hr>
+        <h5>GitHub Credentials</h5>
+        {% include input.html input="username" label="Username" %}
+        {% include input.html type="password" input="password" label="Password" %}
         <button>Commit</button>
       </form>
 
