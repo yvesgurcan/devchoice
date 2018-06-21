@@ -13,6 +13,7 @@
 
   function readResponseError({ status, statusText}) {
     writeFeedback(`Error ${status}: ${statusText}`, 'error')
+    return { error: true, status, statusText }
   }
 
   function extractSha(json) {
@@ -62,32 +63,26 @@
 
     const latestCommit = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
       .then(response => {
-        if (response.status !== 200) readResponseError(response);
+        if (response.status !== 200) return readResponseError(response);
         return response.json();
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
-    if (latestCommit.status !== 200) {
-      return;
-    }
+    if (latestCommit.error) return;
 
     const commitId = extractSha(latestCommit);
-
-    // create branch
-    fetch('{{ site.github_api }}/git/refs', {
+    const createBranch = fetch('{{ site.github_api }}/git/refs', {
       ref: `refs/heads/${branch}`,
       sha: commitId,
       ...authHeaders,
     })
       .then(response => {
-        if (response.status !== 201) readResponseError(response);
+        if (response.status !== 201) return readResponseError(response);
         return response.json();
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
-    if (latestCommit.statusCode !== 201) {
-      return;
-    }
+    if (createBranch.error) return;
 
     // create PR
     // fetch("{{ site.github_api }}/pulls")
