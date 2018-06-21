@@ -7,7 +7,12 @@
   }
 
   function writeFeedback(string, status) {
+    console.log(string)
     document.getElementById('feedback').innerHTML = string;
+  }
+
+  function readResponseError({ status, statusText}) {
+    writeFeedback(`Error ${status}: ${statusText}`, 'error')
   }
 
   async function createPullRequest(event = undefined) {
@@ -44,13 +49,13 @@
     console.log({data});
 
     // get latest commit
-    const response = await fetch('{{ site.github_api }}/git/refs/heads/master', {
+    const fetchCommit = await fetch('{{ site.github_api }}/git/refs/heads/master', {
       headers: {
         Authorization: `Basic ${credentials}`,
       }
     })
       .then(response => {
-        console.log(response)
+        if (response.statusCode !== 200) readResponseError(response);
         return response;
       })
       .catch(error => {
