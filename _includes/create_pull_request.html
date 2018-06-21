@@ -94,7 +94,7 @@
     if (fetchHead.error) return;
 
     const commitId = extractSha(fetchHead);
-    console.log(`Fetched last commit SHA: ${commitId}.`)
+    console.log(`Fetched last commit: ${commitId}.`)
 
     // fetch commit
     const fetchCommitDetails = await fetch(`{{ site.github_api }}/git/commits/${commitId}`, authHeaders)
@@ -123,7 +123,7 @@
     console.log('Fetched tree:', tree)
 
     const targetFolderId = extraShaOfTargetFolder(tree);
-    console.log(`SHA of target folder:'${targetFolderId}`)
+    console.log(`Target folder: ${targetFolderId}`)
 
     // create branch
     const createBranch = await fetch('{{ site.github_api }}/git/refs', {
@@ -162,22 +162,22 @@
     const textBlobId = extractShaFromBlob(createTextBlob);
     console.log(`Created text blob: ${textBlobId}`)
 
-    // create tree
-    const newTree = {
-      base_tree: targetFolderId,
-      tree: [
-        {
-          path: branch,
-          type: 'blob',
-          sha: textBlobId,
-          mode: '100644',
-        },
-      ],
-    };
+    // TODO: create a blob for the image as well, and integrate it in the new tree
 
+    // create tree
     const createTree = await fetch('{{ site.github_api }}/git/trees', {
       method: 'post',
-      body: JSON.stringify({...newTree}),
+      body: JSON.stringify({
+        base_tree: targetFolderId,
+        tree: [
+          {
+            path: branch,
+            type: 'blob',
+            sha: textBlobId,
+            mode: '100644',
+          },
+        ],
+      }),
       ...authHeaders,
     })
       .then(response => {
@@ -187,7 +187,27 @@
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (createTree.error) return;
-    console.log('Created new tree.')
+    const newTreeSha = extractShaFromBlob(createTree);
+    console.log(`Created new tree: ${newTreeSha}`)
+
+    // commit changes
+    const createCommit = await fetch('{{ site.github_api }}/git/commits', {
+      method: 'post',
+      body: JSON.stringify({
+        message: `${podcast} - ${episode}`,
+        tree: newTreeSha,
+        parents: [lastCommitId],
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 201) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (createTextBlob.error) return;
+    console.log(`Changes committed!`)
 
     // create PR
 
