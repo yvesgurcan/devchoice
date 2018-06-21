@@ -23,4 +23,9 @@
     };
     console.log({data});
   }
+
+  document.getElementById("create-pull-request").addEventListener("submit", function(event) {
+    event.preventDefault();
+    createPullRequest(event);
+  }, false);
 </script>
