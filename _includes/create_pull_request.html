@@ -143,29 +143,6 @@
     if (createBranch.error) return;
     console.log(`Created branch: ${branch}.`)
 
-    // create text file
-    /*
-    const createTextBlob = await fetch('{{ site.github_api }}/git/blobs', {
-      method: 'post',
-      body: JSON.stringify({
-        content: `TESTBLOB`,
-      }),
-      ...authHeaders,
-    })
-      .then(response => {
-        if (response.status !== 201) return readResponseError(response);
-        return response.json();
-      })
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
-    if (createTextBlob.error) return;
-
-    const textBlobId = extractShaFromBlob(createTextBlob);
-    console.log(`Created text blob: ${textBlobId}`)
-    */
-
-    // TODO: create a blob for the image as well, and integrate it in the new tree
-
     // create tree
     const createTree = await fetch('{{ site.github_api }}/git/trees', {
       method: 'post',
@@ -173,9 +150,8 @@
         base_tree: targetFolderId,
         tree: [
           {
-            path: branch,
+            path: `${branch}.md`,
             type: 'blob',
-            // sha: textBlobId,
             mode: '100644',
             content: 'YAAAAAAY!',
           },
@@ -195,7 +171,7 @@
 
     // commit changes
     const createCommit = await fetch('{{ site.github_api }}/git/commits', {
-      method: 'post',
+      method: 'patch',
       body: JSON.stringify({
         message: `${podcast} - ${episode}`,
         tree: newTreeSha,
