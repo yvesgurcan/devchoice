@@ -6,6 +6,10 @@
     return string.replace(/[\.\/ ~\^\[\]]/g, '-');
   }
 
+  function writeFeedback(string, status) {
+    document.getElementById('feedback').innerHTML = string;
+  }
+
   function createPullRequest(event = undefined) {
     if (event) {
       event.preventDefault();      
@@ -44,7 +48,12 @@
       headers: {
         Authorization: `Basic ${credentials}`,
       }
-    });
+    })
+      .catch(error => {
+        console.error(error);
+        writeFeedback(`Error while querying repository: ${error.message}`);
+      })
+    ;
 
     // create branch
     /*
@@ -64,6 +73,4 @@
     createPullRequest(event);
   }, false);
 
-  // debug
-  createPullRequest();
 </script>
