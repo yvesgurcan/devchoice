@@ -90,7 +90,7 @@
     if (createBranch.error) return;
     console.log(`Created branch: ${branch}.`)
 
-    const createTextBlob = fetch('{{ site.github_api }}/git/blobs', {
+    const createTextBlob = await fetch('{{ site.github_api }}/git/blobs', {
       method: 'post',
       body: JSON.stringify({
         content: `TESTBLOB`,
