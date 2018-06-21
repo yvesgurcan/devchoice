@@ -144,6 +144,7 @@
     console.log(`Created branch: ${branch}.`)
 
     // create text file
+    /*
     const createTextBlob = await fetch('{{ site.github_api }}/git/blobs', {
       method: 'post',
       body: JSON.stringify({
@@ -161,6 +162,7 @@
 
     const textBlobId = extractShaFromBlob(createTextBlob);
     console.log(`Created text blob: ${textBlobId}`)
+    */
 
     // TODO: create a blob for the image as well, and integrate it in the new tree
 
@@ -173,8 +175,9 @@
           {
             path: branch,
             type: 'blob',
-            sha: textBlobId,
+            // sha: textBlobId,
             mode: '100644',
+            content: 'YAAAAAAY!',
           },
         ],
       }),
@@ -196,7 +199,7 @@
       body: JSON.stringify({
         message: `${podcast} - ${episode}`,
         tree: newTreeSha,
-        parents: [lastCommitId],
+        parents: [commitId],
       }),
       ...authHeaders,
     })
