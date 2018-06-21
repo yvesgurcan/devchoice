@@ -40,7 +40,7 @@
     console.log({data});
 
     // get latest commit
-    fetch('{{ site.github_api }}/git/refs/heads/master', {
+    await fetch('{{ site.github_api }}/git/refs/heads/master', {
       headers: {
         Authorization: `Basic ${credentials}`,
       }
