@@ -190,7 +190,7 @@
     console.log(`Changes committed.`)
 
     // push
-    const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/${branch}`, {
+    const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/master`, {
       method: 'post',
       body: JSON.stringify({
         sha: newCommitId,
