@@ -63,7 +63,7 @@
     const latestCommit = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
       .then(response => {
         if (response.status !== 200) readResponseError(response);
-        return response;
+        return response.json();
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
@@ -81,7 +81,7 @@
     })
       .then(response => {
         if (response.status !== 201) readResponseError(response);
-        return response;
+        return response.json();
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
