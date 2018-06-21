@@ -73,7 +73,7 @@
     const commitId = extractSha(latestCommit);
     console.log(`Fetched last commit: ${commitId}.`)
 
-    const createBranch = fetch('{{ site.github_api }}/git/refs', {
+    const createBranch = await fetch('{{ site.github_api }}/git/refs', {
       method: 'post',
       body: JSON.stringify({
         ref: `refs/heads/${branch}`,
