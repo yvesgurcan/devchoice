@@ -19,5 +19,5 @@ layout: list
 {% endif %}
       <h4>Next Tuesdays and Thursdays</h4>
       {% for weekNumber in (1...50) %}
-        <div>day offset: {{{ offset * weekNumber}}}</div>
+        <div>day offset: {{ offset * weekNumber }}</div>
       {% endfor %}
