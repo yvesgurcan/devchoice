@@ -187,6 +187,7 @@
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (createTree.error) return;
+    console.log('Created new tree.')
 
     // create PR
 
