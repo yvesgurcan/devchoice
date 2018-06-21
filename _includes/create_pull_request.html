@@ -15,6 +15,12 @@
     writeFeedback(`Error ${status}: ${statusText}`, 'error')
   }
 
+  function extractSha(json) {
+    const { object } = json;
+    const { sha } = object;
+    return sha;
+  }
+
   async function createPullRequest(event = undefined) {
     if (event) {
       event.preventDefault();      
@@ -61,20 +67,27 @@
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
-    const { object } = latestCommit;
-    const { sha } = object;
+    if (latestCommit.statusCode != 200) {
+      return;
+    }
+
+    const commitId = extractSha(latestCommit);
 
     // create branch
     fetch('{{ site.github_api }}/git/refs', {
       ref: `refs/heads/${branch}`,
-      sha,
+      sha: commitId,
       ...authHeaders,
     })
       .then(response => {
         if (response.statusCode != 201) readResponseError(response);
         return response;
       })
-      .catch(error => writeFeedback(`Error: ${error.message}`));;
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (latestCommit.statusCode != 201) {
+      return;
+    }
 
     // create PR
     // fetch("{{ site.github_api }}/pulls")
