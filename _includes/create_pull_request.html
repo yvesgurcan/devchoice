@@ -34,10 +34,24 @@
       password
     };
     console.log({data});
+
+    // get latest commit
+    fetch('{{ site.github_api }}/git/refs/heads/master')
+
+    // create branch
+    /*
+    fetch('{{ site.github_api }}/git/refs', {
+      ref: `refs/heads/${branch}`,
+    })
+    */
+
+    // create PR
+    // fetch("{{ site.github_api }}/pulls")
+
     return true;
   }
 
-  document.getElementById("create-pull-request").addEventListener("submit", function(event) {
+  document.getElementById('create-pull-request').addEventListener('submit', function(event) {
     event.preventDefault();
     createPullRequest(event);
   }, false);

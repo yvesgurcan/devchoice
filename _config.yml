@@ -3,6 +3,7 @@ description: a new tech-related podcast recommendation every Tuesday and Thursda
 author: Yves Gurcan
 email: gurcan.yves@gmail.com
 timezone: America/Los_Angeles
+github_api: https://api.github.com/repos/yvesgurcan/devchoice.yvesgurcan.com
 
 feed:
   updatePeriod: daily #can be hourly, daily, weekly, monthly, yearly
