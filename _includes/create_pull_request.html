@@ -72,8 +72,11 @@
 
     const commitId = extractSha(latestCommit);
     const createBranch = fetch('{{ site.github_api }}/git/refs', {
-      ref: `refs/heads/${branch}`,
-      sha: commitId,
+      method: 'post',
+      body: JSON.stringify({
+        ref: `refs/heads/${branch}`,
+        sha: commitId,
+      }),
       ...authHeaders,
     })
       .then(response => {
