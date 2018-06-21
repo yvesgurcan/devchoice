@@ -1,12 +1,15 @@
 <script>
-  function removeIllegalCharacters(string) {
+  function removeIllegalCharacters(string, variation = false) {
+    if (variation) {
+      return string.replace(/[\. ~\^\[\]]/g, '-');
+    }
     return string.replace(/[\.\/ ~\^\[\]]/g, '-');
   }
 
   function createPullRequest(event) {
     event.preventDefault();
     const episode = document.getElementById('episode').value;
-    const permalink = document.getElementById('permalink').value;
+    const slug = document.getElementById('permalink').value;
     const podcast = document.getElementById('podcast').value;
     const description = document.getElementById('description').value;
     const link = document.getElementById('link').value;
@@ -16,6 +19,7 @@
     const password = document.getElementById('password').value;
 
     const branch = removeIllegalCharacters(episode);
+    const permalink = removeIllegalCharacters(slug, true);
 
     const data = {
       episode,
