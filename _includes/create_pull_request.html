@@ -22,6 +22,7 @@
 
     const branch = removeIllegalCharacters(episode);
     const permalink = removeIllegalCharacters(slug, true);
+    const credentials = btoa(`${username}:${password}`);
 
     const data = {
       episode,
@@ -33,14 +34,15 @@
       image,
       branch,
       username,
-      password
+      password,
+      credentials,
     };
     console.log({data});
 
     // get latest commit
     fetch('{{ site.github_api }}/git/refs/heads/master', {
       headers: {
-        Authorization: 'Basic Z3VyY2FuLnl2ZXMrZ2l0aHViQGdtYWlsLmNvbQ==',
+        Authorization: `Basic ${credentials}`,
       }
     });
 
