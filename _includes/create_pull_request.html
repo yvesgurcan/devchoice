@@ -10,7 +10,7 @@
     document.getElementById('feedback').innerHTML = string;
   }
 
-  function createPullRequest(event = undefined) {
+  async function createPullRequest(event = undefined) {
     if (event) {
       event.preventDefault();      
     }
