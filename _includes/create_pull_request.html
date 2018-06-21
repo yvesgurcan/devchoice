@@ -1,4 +1,8 @@
 <script>
+  function removeIllegalCharacters(string) {
+    return string.replace(/[\.\/ ~\^\[\]]/g, '-');
+  }
+
   function createPullRequest(event) {
     event.preventDefault();
     const episode = document.getElementById('episode').value;
@@ -10,6 +14,9 @@
     const image = document.getElementById('image').value;
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+
+    const branch = removeIllegalCharacters(episode);
+
     const data = {
       episode,
       permalink,
@@ -22,6 +29,7 @@
       password
     };
     console.log({data});
+    return true;
   }
 
   document.getElementById("create-pull-request").addEventListener("submit", function(event) {
