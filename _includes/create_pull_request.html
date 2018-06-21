@@ -210,7 +210,26 @@
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (createCommit.error) return;
-    console.log(`Changes committed!`)
+    const newCommitId = extractShaFromBlob(createCommit);
+    console.log(`Changes committed.`)
+
+    // push
+    const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/${branch}`, {
+      method: 'post',
+      body: JSON.stringify({
+        sha: newCommitId,
+        // force: true,
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (pushChanges.error) return;
+    console.log(`Pushed!`)
 
     // create PR
 
