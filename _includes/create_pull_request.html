@@ -22,6 +22,17 @@
     return sha;
   }
 
+  function extractTreeUrl(json) {
+    const { tree } = json;
+    const { url } = tree;
+    return url;
+  }
+
+  function extractTree(json) {
+    const { tree } = json;
+    return tree;
+  }
+
   async function createPullRequest(event = undefined) {
     if (event) {
       event.preventDefault();      
@@ -61,17 +72,41 @@
       }
     };
 
-    const latestCommit = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
+    const fetchHead = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
       .then(response => {
         if (response.status !== 200) return readResponseError(response);
         return response.json();
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
-    if (latestCommit.error) return;
+    if (fetchHead.error) return;
 
-    const commitId = extractSha(latestCommit);
-    console.log(`Fetched last commit: ${commitId}.`)
+    const commitId = extractSha(fetchHead);
+    console.log(`Fetched last commit SHA: ${commitId}.`)
+
+    const fetchCommitDetails = await fetch(`{{ site.github_api }}/git/commits/${commitId}`, authHeaders)
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (fetchCommitDetails.error) return;
+
+    const treeUrl = extractTreeUrl(fetchCommitDetails);
+    console.log(`Fetched tree URL: ${treeUrl}.`)
+
+    const fetchTree = await fetch(treeUrl, authHeaders)
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (fetchTree.error) return;
+
+    const tree = extractTree(fetchTree);
+    console.log(`Fetched tree: ${tree}.`)
 
     const createBranch = await fetch('{{ site.github_api }}/git/refs', {
       method: 'post',
@@ -105,7 +140,9 @@
 
 
     if (createBranch.error) return;
-    console.log(`Created text blob.`)
+
+    const textBlobId = extractSha(createTextBlob);
+    console.log(`Created text blob: ${textBlobId}`)
 
     // create PR
 
