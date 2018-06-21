@@ -48,28 +48,33 @@
     };
     console.log({data});
 
-    // get latest commit
-    const fetchCommit = await fetch('{{ site.github_api }}/git/refs/heads/master', {
+    const authHeaders = {
       headers: {
         Authorization: `Basic ${credentials}`,
       }
-    })
+    };
+
+    const latestCommit = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
       .then(response => {
-        if (response.statusCode !== 200) readResponseError(response);
+        if (response.statusCode != 200) readResponseError(response);
         return response;
       })
-      .catch(error => {
-        console.error(error);
-        writeFeedback(`Error while querying repository: ${error.message}`);
-      })
-    ;
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    const { object } = latestCommit;
+    const { sha } = object;
 
     // create branch
-    /*
     fetch('{{ site.github_api }}/git/refs', {
       ref: `refs/heads/${branch}`,
-    });
-    */
+      sha,
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.statusCode != 201) readResponseError(response);
+        return response;
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));;
 
     // create PR
     // fetch("{{ site.github_api }}/pulls")
