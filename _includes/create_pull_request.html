@@ -33,6 +33,12 @@
     return tree;
   }
 
+  function extraShaOfTargetFolder(json) {
+    const targetFolder = json.find(entry => entry.path === '_podcasts');
+    const { sha } = targetFolder;
+    return sha;
+  }
+
   async function createPullRequest(event = undefined) {
     if (event) {
       event.preventDefault();      
@@ -111,6 +117,9 @@
     const tree = extractTree(fetchTree);
     console.log('Fetched tree:', tree)
 
+    const targetFolderId = extraShaOfTargetFolder(tree);
+    console.log(`SHA of target folder:' ${targetFolderId}`)
+
     // create branch
     const createBranch = await fetch('{{ site.github_api }}/git/refs', {
       method: 'post',
@@ -143,11 +152,36 @@
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
-
-    if (createBranch.error) return;
+    if (createTextBlob.error) return;
 
     const textBlobId = extractSha(createTextBlob);
     console.log(`Created text blob: ${textBlobId}`)
+
+    // create tree
+    const newTree = {
+      base_tree: targetFolderId,
+      tree: [
+        {
+          path: branch,
+          type: 'blob',
+          sha: textBlobId,
+          mode: '100644',
+        },
+      ],
+    };
+
+    const createTree = await fetch('{{ site.github_api }}/git/trees', {
+      method: 'post',
+      body: JSON.stringify({...newTree}),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 201) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (createTree.error) return;
 
     // create PR
 
