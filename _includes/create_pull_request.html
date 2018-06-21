@@ -1,14 +1,15 @@
 <script>
-  function createPullRequest() {
-    const episode = document.getElementById('episode');
-    const permalink = document.getElementById('permalink');
-    const podcast = document.getElementById('podcast');
-    const description = document.getElementById('description');
-    const link = document.getElementById('link');
-    const media = document.getElementById('media');
-    const image = document.getElementById('image');
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
+  function createPullRequest(event) {
+    event.preventDefault();
+    const episode = document.getElementById('episode').value;
+    const permalink = document.getElementById('permalink').value;
+    const podcast = document.getElementById('podcast').value;
+    const description = document.getElementById('description').value;
+    const link = document.getElementById('link').value;
+    const media = document.getElementById('media').value;
+    const image = document.getElementById('image').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
     const data = {
       episode,
       permalink,
