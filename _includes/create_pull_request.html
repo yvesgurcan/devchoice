@@ -33,6 +33,11 @@
     return tree;
   }
 
+    function extractShaFromBlob(json) {
+    const { sha } = json;
+    return sha;
+  }
+
   function extraShaOfTargetFolder(json) {
     const targetFolder = json.find(entry => entry.path === '_podcasts');
     const { sha } = targetFolder;
@@ -118,7 +123,7 @@
     console.log('Fetched tree:', tree)
 
     const targetFolderId = extraShaOfTargetFolder(tree);
-    console.log(`SHA of target folder:' ${targetFolderId}`)
+    console.log(`SHA of target folder:'${targetFolderId}`)
 
     // create branch
     const createBranch = await fetch('{{ site.github_api }}/git/refs', {
@@ -154,7 +159,7 @@
 
     if (createTextBlob.error) return;
 
-    const textBlobId = extractSha(createTextBlob);
+    const textBlobId = extractShaFromBlob(createTextBlob);
     console.log(`Created text blob: ${textBlobId}`)
 
     // create tree
