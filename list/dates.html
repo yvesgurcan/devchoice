@@ -4,17 +4,17 @@ layout: list
 {% assign weekday = site.time | date: '%a' %}
 {% if weekday == 'Mon' %}
 {% assign offset = 1 %}
-{% elseif weekday == 'Tue' }
+{% else if weekday == 'Tue' }
 {% assign offset = 0 %}
-{% elseif weekday == 'Wed' }
+{% else if weekday == 'Wed' }
 {% assign offset = -1 %}
-{% elseif weekday == 'Thu' }
+{% else if weekday == 'Thu' }
 {% assign offset = -2 %}
-{% elseif weekday == 'Fri' }
+{% else if weekday == 'Fri' }
 {% assign offset = 5 %}
-{% elseif weekday == 'Sat' }
+{% else if weekday == 'Sat' }
 {% assign offset = 4 %}
-{% elseif weekday == 'Sun' }
+{% else if weekday == 'Sun' }
 {% assign offset = 3 %}
 {% endif %}
       <h4>Next Tuesdays and Thursdays</h4>
