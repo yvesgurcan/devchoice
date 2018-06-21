@@ -72,6 +72,7 @@
       }
     };
 
+    // fetch head
     const fetchHead = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
       .then(response => {
         if (response.status !== 200) return readResponseError(response);
@@ -84,6 +85,7 @@
     const commitId = extractSha(fetchHead);
     console.log(`Fetched last commit SHA: ${commitId}.`)
 
+    // fetch commit
     const fetchCommitDetails = await fetch(`{{ site.github_api }}/git/commits/${commitId}`, authHeaders)
       .then(response => {
         if (response.status !== 200) return readResponseError(response);
@@ -96,6 +98,7 @@
     const treeUrl = extractTreeUrl(fetchCommitDetails);
     console.log(`Fetched tree URL: ${treeUrl}.`)
 
+    // fetch tree
     const fetchTree = await fetch(treeUrl, authHeaders)
       .then(response => {
         if (response.status !== 200) return readResponseError(response);
@@ -106,8 +109,9 @@
     if (fetchTree.error) return;
 
     const tree = extractTree(fetchTree);
-    console.log(`Fetched tree: ${tree}.`)
+    console.log('Fetched tree:', tree)
 
+    // create branch
     const createBranch = await fetch('{{ site.github_api }}/git/refs', {
       method: 'post',
       body: JSON.stringify({
@@ -125,6 +129,7 @@
     if (createBranch.error) return;
     console.log(`Created branch: ${branch}.`)
 
+    // create text file
     const createTextBlob = await fetch('{{ site.github_api }}/git/blobs', {
       method: 'post',
       body: JSON.stringify({
