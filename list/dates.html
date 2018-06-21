@@ -1,9 +1,24 @@
 ---
 layout: list
 ---
-{% assign now = site.time | date: '%s' %}
+{% assign weekday = site.time | date: '%a' %}
+{% if weekday == 'Mon' %}
+{% assign offset = 1 %}
+{% elseif weekday == 'Tue' }
+{% assign offset = 0 %}
+{% elseif weekday == 'Wed' }
+{% assign offset = -1 %}
+{% elseif weekday == 'Thu' }
+{% assign offset = -2 %}
+{% elseif weekday == 'Fri' }
+{% assign offset = 5 %}
+{% elseif weekday == 'Sat' }
+{% assign offset = 4 %}
+{% elseif weekday == 'Sun' }
+{% assign offset = 3 %}
+{% endif %}
       <h4>Next Tuesdays and Thursdays</h4>
       {% for weekNumber in (1...50) %}
-        {% if %}<div>Tuesday: </div>
-        {% else %}<div>Thursday: </div>{% endif %}
+        {% if 1 % 2 === 0 %}<div>Tuesday: {{{ offset * weekNumber}}}</div>
+        {% else %}<div>Thursday: {{{ offset * weekNumber + 2}}}</div>{% endif %}
       {% endfor %}
