@@ -184,7 +184,7 @@ header {
 
 .form-group {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
 .button {
