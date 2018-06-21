@@ -182,6 +182,11 @@ header {
     }
 }
 
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
 .button {
     padding: 10px;
     cursor: pointer;
