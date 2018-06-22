@@ -14,6 +14,7 @@ layout: list
         <h5>GitHub Credentials</h5>
 {% include input.html input="username" label="Username" %}
 {% include input.html input="password" type="password" label="Password" %}
+        <div id="feedback"></div>
         <button>Commit</button>
       </form>
       {% include create_pull_request.html %}

@@ -6,8 +6,48 @@
     return string.replace(/[\.\/ ~\^\[\]]/g, '-');
   }
 
-  function createPullRequest(event) {
-    event.preventDefault();
+  function writeFeedback(string, status) {
+    console.log(string)
+    document.getElementById('feedback').innerHTML = string;
+  }
+
+  function readResponseError({ status, statusText}) {
+    writeFeedback(`Error ${status}: ${statusText}`, 'error')
+    return { error: true, status, statusText }
+  }
+
+  function extractSha(json) {
+    const { object } = json;
+    const { sha } = object;
+    return sha;
+  }
+
+  function extractTreeUrl(json) {
+    const { tree } = json;
+    const { url } = tree;
+    return url;
+  }
+
+  function extractTree(json) {
+    const { tree } = json;
+    return tree;
+  }
+
+    function extractShaFromBlob(json) {
+    const { sha } = json;
+    return sha;
+  }
+
+  function extraShaOfTargetFolder(json) {
+    const targetFolder = json.find(entry => entry.path === '_podcasts');
+    const { sha } = targetFolder;
+    return sha;
+  }
+
+  async function createPullRequest(event = undefined) {
+    if (event) {
+      event.preventDefault();      
+    }
     const episode = document.getElementById('episode').value;
     const slug = document.getElementById('permalink').value;
     const podcast = document.getElementById('podcast').value;
@@ -20,6 +60,7 @@
 
     const branch = removeIllegalCharacters(episode);
     const permalink = removeIllegalCharacters(slug, true);
+    const credentials = btoa(`${username}:${password}`);
 
     const data = {
       episode,
@@ -31,14 +72,151 @@
       image,
       branch,
       username,
-      password
+      password,
+      credentials,
     };
     console.log({data});
+
+    const authHeaders = {
+      headers: {
+        Authorization: `Basic ${credentials}`,
+      }
+    };
+
+    // fetch head
+    const fetchHead = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (fetchHead.error) return;
+
+    const commitId = extractSha(fetchHead);
+    console.log(`Fetched last commit: ${commitId}.`)
+
+    // fetch commit
+    const fetchCommitDetails = await fetch(`{{ site.github_api }}/git/commits/${commitId}`, authHeaders)
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (fetchCommitDetails.error) return;
+
+    const treeUrl = extractTreeUrl(fetchCommitDetails);
+    console.log(`Fetched tree URL: ${treeUrl}.`)
+
+    // fetch tree
+    const fetchTree = await fetch(treeUrl, authHeaders)
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (fetchTree.error) return;
+
+    const tree = extractTree(fetchTree);
+    console.log('Fetched tree:', tree)
+
+    const targetFolderId = extraShaOfTargetFolder(tree);
+    console.log(`Target folder: ${targetFolderId}`)
+
+    // create branch
+    const createBranch = await fetch('{{ site.github_api }}/git/refs', {
+      method: 'post',
+      body: JSON.stringify({
+        ref: `refs/heads/${branch}`,
+        sha: commitId,
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 201) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (createBranch.error) return;
+    console.log(`Created branch: ${branch}.`)
+
+    // create tree
+    const createTree = await fetch('{{ site.github_api }}/git/trees', {
+      method: 'post',
+      body: JSON.stringify({
+        base_tree: targetFolderId,
+        tree: [
+          {
+            path: `${branch}.md`,
+            type: 'blob',
+            mode: '100644',
+            content: 'YAAAAAAY!',
+          },
+        ],
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 201) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (createTree.error) return;
+    const newTreeSha = extractShaFromBlob(createTree);
+    console.log(`Created new tree: ${newTreeSha}`)
+
+    // commit changes
+    const createCommit = await fetch('{{ site.github_api }}/git/commits', {
+      method: 'post',
+      body: JSON.stringify({
+        message: `${podcast} - ${episode}`,
+        tree: newTreeSha,
+        parents: [commitId],
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 201) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (createCommit.error) return;
+    const newCommitId = extractShaFromBlob(createCommit);
+    console.log(`Changes committed.`)
+
+    // push
+    const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/master`, {
+      method: 'post',
+      body: JSON.stringify({
+        sha: newCommitId,
+        // force: true,
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (pushChanges.error) return;
+    console.log(`Pushed!`)
+
+    // create PR
+
+    // fetch("{{ site.github_api }}/pulls")
+
     return true;
   }
 
-  document.getElementById("create-pull-request").addEventListener("submit", function(event) {
+  document.getElementById('create-pull-request').addEventListener('submit', function(event) {
     event.preventDefault();
     createPullRequest(event);
   }, false);
+
 </script>
