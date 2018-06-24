@@ -119,6 +119,8 @@
 
     if (fetchTree.error) return;
 
+    const rootTreeId = extractShaFromBlob(fetchTree);
+    console.log('Fetched SHA of the root tree of the commit:', rootTreeId)
     const tree = extractTree(fetchTree);
     console.log('Fetched JSON representation of the commit:', tree)
 
@@ -147,7 +149,8 @@
     const createTree = await fetch('{{ site.github_api }}/git/trees', {
       method: 'post',
       body: JSON.stringify({
-        base_tree: '',//targetFolderId,
+        // WIP
+        base_tree: rootTreeId, //targetFolderId,
         tree: [
           {
             path: `${branch}.md`,
