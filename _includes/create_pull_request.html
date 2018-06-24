@@ -94,7 +94,7 @@
     if (fetchHead.error) return;
 
     const commitId = extractSha(fetchHead);
-    console.log(`Fetched last commit: ${commitId}.`)
+    console.log(`Fetched last commit to master: ${commitId}.`)
 
     // fetch commit
     const fetchCommitDetails = await fetch(`{{ site.github_api }}/git/commits/${commitId}`, authHeaders)
@@ -107,7 +107,7 @@
     if (fetchCommitDetails.error) return;
 
     const treeUrl = extractTreeUrl(fetchCommitDetails);
-    console.log(`Fetched tree URL: ${treeUrl}.`)
+    console.log(`Fetched tree URL of the commit: ${treeUrl}.`)
 
     // fetch tree
     const fetchTree = await fetch(treeUrl, authHeaders)
@@ -120,10 +120,10 @@
     if (fetchTree.error) return;
 
     const tree = extractTree(fetchTree);
-    console.log('Fetched tree:', tree)
+    console.log('Fetched JSON representation of the commit:', tree)
 
     const targetFolderId = extraShaOfTargetFolder(tree);
-    console.log(`Target folder: ${targetFolderId}`)
+    console.log(`SHA of target folder '_podcasts': ${targetFolderId}`)
 
     // create branch
     const createBranch = await fetch('{{ site.github_api }}/git/refs', {
