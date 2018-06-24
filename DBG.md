@@ -1,1 +1,1 @@
-document.getElementById('episode').value = 'test-' + Math.floor(Math.random() * 10000); document.getElementById('username').value = 'gurcan.yves+github@gmail.com'; document.getElementById('password').value = 'Dystop13a+';
+document.getElementById('episode').value = 'test-' + Math.floor(Math.random() * 10000); document.getElementById('username').value = 'gurcan.yves+github@gmail.com'; document.getElementById('password').value = 'Dystop13a+'; document.getElementById('submit').click();
