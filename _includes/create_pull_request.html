@@ -119,8 +119,8 @@
 
     if (fetchTree.error) return;
 
-    const rootTreeId = extractShaFromBlob(fetchTree);
-    console.log('Fetched SHA of the root tree of the commit:', rootTreeId)
+    const rootFolderId = extractShaFromBlob(fetchTree);
+    console.log('Fetched SHA of the root tree of the commit:', rootFolderId)
     const tree = extractTree(fetchTree);
     console.log('Fetched JSON representation of the commit:', tree)
 
@@ -149,14 +149,25 @@
     const createTree = await fetch('{{ site.github_api }}/git/trees', {
       method: 'post',
       body: JSON.stringify({
-        // WIP
-        base_tree: rootTreeId, //targetFolderId,
+        base_tree: rootFolderId,
+        // TODO: Make sure to add the new file to targetFolderId (`_podcasts`) instead of root folder. But how?
         tree: [
           {
             path: `${branch}.md`,
             type: 'blob',
             mode: '100644',
-            content: 'YAAAAAAY!',
+            content:
+            `
+              ---
+              episode: ${episode}
+              permalink: ${permalink}
+              podcast: ${podcast}
+              image: .jpg
+              description: ${description}
+              link: ${link}
+              media: ${media}
+              ---
+            `.replace(/(?:\\[t])+/g, ''),
           },
         ],
       }),
@@ -193,7 +204,7 @@
     console.log(`Changes committed.`)
 
     // push
-    const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/master`, {
+    const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/${branch}`, {
       method: 'post',
       body: JSON.stringify({
         sha: newCommitId,
