@@ -201,7 +201,7 @@
 
     if (createCommit.error) return;
     const newCommitId = extractShaFromBlob(createCommit);
-    console.log(`Changes committed.`)
+    console.log(`Changes committed to ${branch}.`)
 
     // push
     const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/${branch}`, {
@@ -219,7 +219,7 @@
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (pushChanges.error) return;
-    console.log(`Pushed!`)
+    console.log(`Pushed commit to ${branch}!`)
 
     // create PR
 
