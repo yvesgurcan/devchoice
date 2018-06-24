@@ -147,7 +147,7 @@
     const createTree = await fetch('{{ site.github_api }}/git/trees', {
       method: 'post',
       body: JSON.stringify({
-        base_tree: targetFolderId,
+        base_tree: '',//targetFolderId,
         tree: [
           {
             path: `${branch}.md`,
