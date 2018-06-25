@@ -6,9 +6,14 @@
     return string.replace(/[\.\/ ~\^\[\]]/g, '-');
   }
 
-  function writeFeedback(string, status) {
-    console.log(string)
-    document.getElementById('feedback').innerHTML = string;
+  // TODO
+  function requestIsValid () {
+    return true;
+  }
+
+  function readResponse(response, expectedStatus) {
+    if (response.status !== expectedStatus) return readResponseError(response);
+    return response.json();
   }
 
   function readResponseError({ status, statusText}) {
@@ -16,9 +21,13 @@
     return { error: true, status, statusText }
   }
 
+  function writeFeedback(string, status) {
+    console.log(string)
+    document.getElementById('feedback').innerHTML = string;
+  }
+
   function extractSha(json) {
-    const { object } = json;
-    const { sha } = object;
+    const { sha } = json;
     return sha;
   }
 
@@ -33,15 +42,27 @@
     return tree;
   }
 
-    function extractShaFromBlob(json) {
-    const { sha } = json;
-    return sha;
+  function createTextFile ({ branch, episode, permalink, podcast, description, link, media }) {
+    return {
+      path: `_podcasts/${branch}.md`,
+      type: 'blob',
+      mode: '100644',
+      content:
+      `---
+      episode: ${episode}
+      permalink: ${permalink}
+      podcast: ${podcast}
+      image: .jpg
+      description: ${description}
+      link: ${link}
+      media: ${media}
+      ---`.replace(/            /g, ''),
+    }
   }
 
-  function extraShaOfTargetFolder(json) {
-    const targetFolder = json.find(entry => entry.path === '_podcasts');
-    const { sha } = targetFolder;
-    return sha;
+  function createImage ({ image, podcast, episode }) {
+    if (!image) return null;
+    return null
   }
 
   async function createPullRequest(event = undefined) {
@@ -83,27 +104,23 @@
       }
     };
 
+    function fetchWithAuth (url, options = {}) {
+      return fetch(url, {...options, authHeaders})
+    }
+
     // fetch head
-    console.log('GET {{ site.github_api }}/git/refs/heads/master');
-    const fetchHead = await fetch('{{ site.github_api }}/git/refs/heads/master', authHeaders)
-      .then(response => {
-        if (response.status !== 200) return readResponseError(response);
-        return response.json();
-      })
+    const fetchHead = await fetchWithAuth('{{ site.github_api }}/git/refs/heads/master')
+      .then(response => readResponse(response, 200))
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (fetchHead.error) return;
 
-    const commitId = extractSha(fetchHead);
+    const commitId = extractSha(fetchHead.object);
     console.log(`Fetched last commit to master: ${commitId}.`)
 
     // fetch commit
-    console.log(`GET {{ site.github_api }}/git/commits/${commitId}`);
-    const fetchCommitDetails = await fetch(`{{ site.github_api }}/git/commits/${commitId}`, authHeaders)
-      .then(response => {
-        if (response.status !== 200) return readResponseError(response);
-        return response.json();
-      })
+    const fetchCommitDetails = await fetchWithAuth(`{{ site.github_api }}/git/commits/${commitId}`)
+      .then(response => readResponse(response, 200))
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (fetchCommitDetails.error) return;
@@ -112,89 +129,59 @@
     console.log(`Fetched tree URL of the commit: ${treeUrl}.`)
 
     // fetch tree
-    console.log(`GET ${treeUrl}`);
-    const fetchTree = await fetch(`${treeUrl}`, authHeaders)
-      .then(response => {
-        if (response.status !== 200) return readResponseError(response);
-        return response.json();
-      })
+    const fetchTree = await fetchWithAuth(`${treeUrl}`)
+      .then(response => readResponse(response, 200))
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (fetchTree.error) return;
 
-    const rootFolderId = extractShaFromBlob(fetchTree);
+    const rootFolderId = extractSha(fetchTree);
     console.log('Fetched SHA of the root tree of the commit:', rootFolderId)
 
     // create branch
-    console.log('POST {{ site.github_api }}/git/refs');
-    const createBranch = await fetch('{{ site.github_api }}/git/refs', {
+    const createBranch = await fetchWithAuth('{{ site.github_api }}/git/refs', {
       method: 'post',
       body: JSON.stringify({
         ref: `refs/heads/${branch}`,
         sha: commitId,
       }),
-      ...authHeaders,
     })
-      .then(response => {
-        if (response.status !== 201) return readResponseError(response);
-        return response.json();
-      })
+      .then(response => readResponse(response, 201))
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (createBranch.error) return;
     console.log(`Created branch: ${branch}.`)
 
     // create tree
-    console.log('POST {{ site.github_api }}/git/trees');
-    const createTree = await fetch('{{ site.github_api }}/git/trees', {
+    const newTree = [
+      ...createTextFile(data),
+      ...createImage(data),
+    ];
+    const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
       method: 'post',
       body: JSON.stringify({
         base_tree: rootFolderId,
-        tree: [
-          {
-            path: `_podcasts/${branch}.md`,
-            type: 'blob',
-            mode: '100644',
-            content:
-            `---
-            episode: ${episode}
-            permalink: ${permalink}
-            podcast: ${podcast}
-            image: .jpg
-            description: ${description}
-            link: ${link}
-            media: ${media}
-            ---`.replace(/            /g, ''),
-          },
-        ],
+        tree: newTree.filter(entry => entry !== null),
       }),
-      ...authHeaders,
     })
-      .then(response => {
-        if (response.status !== 201) return readResponseError(response);
-        return response.json();
-      })
+      .then(response => readResponse(response, 201))
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (createTree.error) return;
-    const newTreeSha = extractShaFromBlob(createTree);
+    const newTreeSha = extractSha(createTree);
     console.log(`Created new tree: ${newTreeSha}`)
 
     // commit changes
     console.log('POST {{ site.github_api }}/git/commits');
-    const createCommit = await fetch('{{ site.github_api }}/git/commits', {
+    const createCommit = await fetchWithAuth('{{ site.github_api }}/git/commits', {
       method: 'post',
       body: JSON.stringify({
         message: `${podcast} - ${episode}`,
         tree: newTreeSha,
         parents: [commitId],
       }),
-      ...authHeaders,
     })
-      .then(response => {
-        if (response.status !== 201) return readResponseError(response);
-        return response.json();
-      })
+      .then(response => readResponse(response, 201))
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (createCommit.error) return;
@@ -202,19 +189,13 @@
     console.log(`Changes committed to ${branch}.`)
 
     // push
-    console.log(`POST {{ site.github_api }}/git/refs/heads/${branch}`);
-    const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/${branch}`, {
+    const pushChanges = await fetchWithAuth(`{{ site.github_api }}/git/refs/heads/${branch}`, {
       method: 'post',
       body: JSON.stringify({
         sha: newCommitId,
-        // force: true,
       }),
-      ...authHeaders,
     })
-      .then(response => {
-        if (response.status !== 200) return readResponseError(response);
-        return response.json();
-      })
+      .then(response => readResponse(response, 200))
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (pushChanges.error) return;
