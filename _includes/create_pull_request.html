@@ -146,20 +146,19 @@
     if (fetchHead.error) return;
 
     const commitId = extractSha(fetchHead.object);
-    console.log(`Fetched last commit to master: ${commitId}.`)
+    console.log(`Fetched last commit to master: ${commitId}.`);
 
-    // fetch commit
     const fetchCommitDetails = await fetchWithAuth(`{{ site.github_api }}/git/commits/${commitId}`);
     if (fetchCommitDetails.error) return;
 
     const treeUrl = extractTreeUrl(fetchCommitDetails);
-    console.log(`Fetched tree URL of the commit: ${treeUrl}.`)
+    console.log(`Fetched tree URL of the commit: ${treeUrl}.`);
 
     const fetchTree = await fetchWithAuth(`${treeUrl}`);
     if (fetchTree.error) return;
 
     const rootFolderId = extractSha(fetchTree);
-    console.log('Fetched SHA of the root tree of the commit:', rootFolderId)
+    console.log('Fetched SHA of the root tree of the commit:', rootFolderId);
 
     const createBranch = await fetchWithAuth('{{ site.github_api }}/git/refs', {
       method: 'post',
@@ -167,14 +166,13 @@
         ref: `refs/heads/${branch}`,
         sha: commitId,
       }),
-    }, 201)
+    }, 201);
     if (createBranch.error) return;
-    console.log(`Created branch: ${branch}.`)
+    console.log(`Created branch: ${branch}.`);
 
-    // create tree
-    const imageResult = createImage(data)
+    const imageResult = createImage(data);
     const newTree = [
-      createTextFile(data, imageResult.filename),
+      createTextFile(data, imageResult.filename || ''),
       imageResult.blob,
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
@@ -209,9 +207,8 @@
     if (pushChanges.error) return;
     console.log(`Pushed commit to ${branch}!`)
 
-    // create PR
-
-    // fetch("{{ site.github_api }}/pulls")
+    // TODO
+    // const createPullRequest = fetchWithAuth("{{ site.github_api }}/pulls")
 
     return true;
   }
