@@ -215,7 +215,7 @@
       })
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
-    if (pushChanges.error) return;
+    if (pushRoot.error) return;
     console.log(`Pushed commit to ${branch}!`)
 
     // commit changes
