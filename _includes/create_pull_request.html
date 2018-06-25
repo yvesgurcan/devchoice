@@ -46,7 +46,7 @@
     return url;
   }
 
-  function createTextFile ({ branch, episode, permalink, podcast, description, link, media }) {
+  function createTextFile (data)//{ branch, episode, permalink, podcast, description, link, media }) {
     return {
       path: `_podcasts/${branch}.md`,
       type: 'blob',
