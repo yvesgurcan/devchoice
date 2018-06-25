@@ -148,8 +148,8 @@
 
     // create tree
     const newTree = [
-      ...createTextFile({...data}),
-      ...createImage({...data}),
+      createTextFile(data),
+      createImage(data),
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
       method: 'post',
