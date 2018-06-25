@@ -111,6 +111,20 @@
     const treeUrl = extractTreeUrl(fetchCommitDetails);
     console.log(`Fetched tree URL of the commit: ${treeUrl}.`)
 
+    // fetch tree
+    console.log(`GET ${treeUrl}`);
+    const fetchTree = await fetch(`${treeUrl}`, authHeaders)
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (fetchTree.error) return;
+
+    const rootFolderId = extractShaFromBlob(fetchTree);
+    console.log('Fetched SHA of the root tree of the commit:', rootFolderId)
+
     // create branch
     console.log('POST {{ site.github_api }}/git/refs');
     const createBranch = await fetch('{{ site.github_api }}/git/refs', {
