@@ -46,7 +46,7 @@
     return url;
   }
 
-  function createTextFile (data) {
+  function createTextFile (data, imageFilename) {
     const {
       branch,
       episode,
@@ -65,7 +65,7 @@
       episode: ${episode}
       permalink: ${permalink}
       podcast: ${podcast}
-      image: .jpg
+      image: ${imageFilename}
       description: ${description}
       link: ${link}
       media: ${media}
@@ -73,9 +73,26 @@
     }
   }
 
-  function createImage ({ image, podcast, episode }) {
-    if (!image) return null;
-    return null
+  function createImage (data) {
+    const {
+      branch,
+      episode,
+      podcast,
+      image,
+    } = data;
+    if (!image) return {
+      filename: null,
+      blob: null,
+    }
+    
+    // TODO
+    const filename = 'something.jpg';
+
+    return {
+      filename,
+      blob: {
+      },
+    }
   }
 
   async function createPullRequest (event = undefined) {
@@ -155,9 +172,10 @@
     console.log(`Created branch: ${branch}.`)
 
     // create tree
+    const imageResult = createImage(data)
     const newTree = [
-      createTextFile(data),
-      createImage(data),
+      createTextFile(data, imageResult.filename),
+      imageResult.blob,
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
       method: 'post',
