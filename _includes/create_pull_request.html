@@ -149,7 +149,7 @@
     const createTree = await fetch('{{ site.github_api }}/git/trees', {
       method: 'post',
       body: JSON.stringify({
-        base_tree: rootFolderId,
+        base_tree: targetFolderId, // rootFolderId,
         // TODO: Make sure to add the new file to targetFolderId (`_podcasts`) instead of root folder. But how?
         tree: [
           {
