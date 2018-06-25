@@ -181,6 +181,25 @@
     const newTreeSha = extractShaFromBlob(createTree);
     console.log(`Created new tree: ${newTreeSha}`)
 
+    // commit master to branch
+    const createCommitRoot = await fetch('{{ site.github_api }}/git/commits', {
+      method: 'post',
+      body: JSON.stringify({
+        message: `New branch`,
+        tree: rootFolderId,
+        parents: [commitId],
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 201) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (createCommitRoot.error) return;
+    console.log(`Commited the content of master to ${branch}.`)
+
     // commit changes
     const createCommit = await fetch('{{ site.github_api }}/git/commits', {
       method: 'post',
