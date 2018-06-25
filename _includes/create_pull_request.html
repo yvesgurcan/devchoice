@@ -112,7 +112,7 @@
     };
 
     function fetchWithAuth (url, options = {}) {
-      return fetch(url, {...options, authHeaders})
+      return fetch(url, {...options, ...authHeaders})
     }
 
     // fetch head
