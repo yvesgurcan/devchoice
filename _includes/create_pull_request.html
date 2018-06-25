@@ -223,7 +223,7 @@
       method: 'post',
       body: JSON.stringify({
         message: `${podcast} - ${episode}`,
-        tree: newTreeSha,
+        tree: rootFolderId,
         parents: [newRootCommitId],
       }),
       ...authHeaders,
