@@ -193,7 +193,7 @@
       body: JSON.stringify({
         message: `${podcast} - ${episode}`,
         tree: newTreeSha,
-        parents: [newRootCommitId],
+        parents: [commitId],
       }),
       ...authHeaders,
     })
