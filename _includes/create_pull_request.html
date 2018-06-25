@@ -197,7 +197,7 @@
       }),
     }, 201);
     if (createCommit.error) return;
-    const newCommitId = extractShaFromBlob(createCommit);
+    const newCommitId = extractSha(createCommit);
     console.log(`Changes committed to ${branch}.`)
 
     const pushChanges = await fetchWithAuth(`{{ site.github_api }}/git/refs/heads/${branch}`, {
