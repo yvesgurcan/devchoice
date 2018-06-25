@@ -7,37 +7,42 @@
   }
 
   // TODO
-  function requestIsValid () {
+  function validateRequest ({ episode }) {
+    if (!episode) {
+      writeFeedback('Missing episode name.', 'validation')
+      return false
+    }
+
     return true;
   }
 
-  function readResponse(response, expectedStatus) {
+  function readResponse (response, expectedStatus) {
     if (response.status !== expectedStatus) return readResponseError(response);
     return response.json();
   }
 
-  function readResponseError({ status, statusText}) {
+  function readResponseError ({ status, statusText}) {
     writeFeedback(`Error ${status}: ${statusText}`, 'error')
     return { error: true, status, statusText }
   }
 
-  function writeFeedback(string, status) {
+  function writeFeedback (string, status) {
     console.log(string)
     document.getElementById('feedback').innerHTML = string;
   }
 
-  function extractSha(json) {
+  function extractSha (json) {
     const { sha } = json;
     return sha;
   }
 
-  function extractTreeUrl(json) {
+  function extractTreeUrl (json) {
     const { tree } = json;
     const { url } = tree;
     return url;
   }
 
-  function extractTree(json) {
+  function extractTree (json) {
     const { tree } = json;
     return tree;
   }
@@ -65,7 +70,7 @@
     return null
   }
 
-  async function createPullRequest(event = undefined) {
+  async function createPullRequest (event = undefined) {
     if (event) {
       event.preventDefault();      
     }
@@ -97,6 +102,8 @@
       credentials,
     };
     console.log({data});
+
+    if (!validateRequest(data)) return;
 
     const authHeaders = {
       headers: {
