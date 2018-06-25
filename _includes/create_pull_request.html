@@ -35,16 +35,15 @@
     const { sha } = json;
     return sha;
   }
-
-  function extractTreeUrl (json) {
-    const { tree } = json;
-    const { url } = tree;
-    return url;
-  }
-
+  
   function extractTree (json) {
     const { tree } = json;
     return tree;
+  }
+
+  function extractTreeUrl (json) {
+    const { url } = extractTree(json);
+    return url;
   }
 
   function createTextFile ({ branch, episode, permalink, podcast, description, link, media }) {
