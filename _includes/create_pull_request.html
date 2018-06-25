@@ -157,17 +157,15 @@
             type: 'blob',
             mode: '100644',
             content:
-            `
-              ---
-              episode: ${episode}
-              permalink: ${permalink}
-              podcast: ${podcast}
-              image: .jpg
-              description: ${description}
-              link: ${link}
-              media: ${media}
-              ---
-            `.replace(/              /g, ''),
+            `---
+            episode: ${episode}
+            permalink: ${permalink}
+            podcast: ${podcast}
+            image: .jpg
+            description: ${description}
+            link: ${link}
+            media: ${media}
+            ---`.replace(/            /g, ''),
           },
         ],
       }),
