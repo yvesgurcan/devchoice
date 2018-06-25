@@ -16,7 +16,7 @@
     return true;
   }
 
-  function readResponse (response, expectedStatus) {
+  function readResponse (response, expectedStatus = 200) {
     if (response.status !== expectedStatus) return readResponseError(response);
     return response.json();
   }
@@ -111,58 +111,45 @@
       }
     };
 
-    function fetchWithAuth (url, options = {}) {
+    function fetchWithAuth (url, options = {}, expectedStatus) {
       return fetch(url, {...options, ...authHeaders})
+        .then(response => readResponse(response, expectedStatus))
+        .catch(error => writeFeedback(`Error: ${error.message}`));
     }
 
-    // fetch head
-    const fetchHead = await fetchWithAuth('{{ site.github_api }}/git/refs/heads/master')
-      .then(response => readResponse(response, 200))
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
+    const fetchHead = await fetchWithAuth('{{ site.github_api }}/git/refs/heads/master');
     if (fetchHead.error) return;
 
     const commitId = extractSha(fetchHead.object);
     console.log(`Fetched last commit to master: ${commitId}.`)
 
     // fetch commit
-    const fetchCommitDetails = await fetchWithAuth(`{{ site.github_api }}/git/commits/${commitId}`)
-      .then(response => readResponse(response, 200))
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
+    const fetchCommitDetails = await fetchWithAuth(`{{ site.github_api }}/git/commits/${commitId}`);
     if (fetchCommitDetails.error) return;
 
     const treeUrl = extractTreeUrl(fetchCommitDetails);
     console.log(`Fetched tree URL of the commit: ${treeUrl}.`)
 
-    // fetch tree
-    const fetchTree = await fetchWithAuth(`${treeUrl}`)
-      .then(response => readResponse(response, 200))
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
+    const fetchTree = await fetchWithAuth(`${treeUrl}`);
     if (fetchTree.error) return;
 
     const rootFolderId = extractSha(fetchTree);
     console.log('Fetched SHA of the root tree of the commit:', rootFolderId)
 
-    // create branch
     const createBranch = await fetchWithAuth('{{ site.github_api }}/git/refs', {
       method: 'post',
       body: JSON.stringify({
         ref: `refs/heads/${branch}`,
         sha: commitId,
       }),
-    })
-      .then(response => readResponse(response, 201))
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
+    }, 201)
     if (createBranch.error) return;
     console.log(`Created branch: ${branch}.`)
 
     // create tree
     const newTree = [
-      ...createTextFile(data),
-      ...createImage(data),
+      ...createTextFile({...data}),
+      ...createImage({...data}),
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
       method: 'post',
@@ -170,16 +157,11 @@
         base_tree: rootFolderId,
         tree: newTree.filter(entry => entry !== null),
       }),
-    })
-      .then(response => readResponse(response, 201))
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
+    }, 201);
     if (createTree.error) return;
     const newTreeSha = extractSha(createTree);
     console.log(`Created new tree: ${newTreeSha}`)
 
-    // commit changes
-    console.log('POST {{ site.github_api }}/git/commits');
     const createCommit = await fetchWithAuth('{{ site.github_api }}/git/commits', {
       method: 'post',
       body: JSON.stringify({
@@ -187,24 +169,17 @@
         tree: newTreeSha,
         parents: [commitId],
       }),
-    })
-      .then(response => readResponse(response, 201))
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
+    }, 201);
     if (createCommit.error) return;
     const newCommitId = extractShaFromBlob(createCommit);
     console.log(`Changes committed to ${branch}.`)
 
-    // push
     const pushChanges = await fetchWithAuth(`{{ site.github_api }}/git/refs/heads/${branch}`, {
       method: 'post',
       body: JSON.stringify({
         sha: newCommitId,
       }),
-    })
-      .then(response => readResponse(response, 200))
-      .catch(error => writeFeedback(`Error: ${error.message}`));
-
+    });
     if (pushChanges.error) return;
     console.log(`Pushed commit to ${branch}!`)
 
