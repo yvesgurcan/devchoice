@@ -208,7 +208,7 @@
     console.log(`Changes committed to ${branch}.`)
 
     // push
-    console.log('POST {{ site.github_api }}/git/refs/heads/${branch}');
+    console.log(`POST {{ site.github_api }}/git/refs/heads/${branch}`);
     const pushChanges = await fetch(`{{ site.github_api }}/git/refs/heads/${branch}`, {
       method: 'post',
       body: JSON.stringify({
