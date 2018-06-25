@@ -198,7 +198,25 @@
       .catch(error => writeFeedback(`Error: ${error.message}`));
 
     if (createCommitRoot.error) return;
+    const newRootCommitId = extractShaFromBlob(createCommitRoot);
     console.log(`Commited the content of master to ${branch}.`)
+
+    // push root
+    const pushRoot = await fetch(`{{ site.github_api }}/git/refs/heads/${branch}`, {
+      method: 'post',
+      body: JSON.stringify({
+        sha: newRootCommitId,
+      }),
+      ...authHeaders,
+    })
+      .then(response => {
+        if (response.status !== 200) return readResponseError(response);
+        return response.json();
+      })
+      .catch(error => writeFeedback(`Error: ${error.message}`));
+
+    if (pushChanges.error) return;
+    console.log(`Pushed commit to ${branch}!`)
 
     // commit changes
     const createCommit = await fetch('{{ site.github_api }}/git/commits', {
