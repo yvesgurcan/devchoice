@@ -2,6 +2,8 @@
 
 ## How to add suggestions
 
+Go to list/add
+
 ## Front matter
 
 * Create a new markdown file in `/_podcasts`. The name of the file should follow this pattern: `YYYY-MM-DD-the-name-of-the-episode.md`, where the prepended date corresponds to the date where the suggestion will be publicly displayed.
