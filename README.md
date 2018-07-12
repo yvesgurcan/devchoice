@@ -2,11 +2,11 @@
 
 ## How to add suggestions
 
-Go to list/add
+Go to <https://devchoice.yvesgurcan.com/list/add>. Fill out the form.
 
 ## Front matter
 
-* Create a new markdown file in `/_podcasts`. The name of the file should follow this pattern: `YYYY-MM-DD-the-name-of-the-episode.md`, where the prepended date corresponds to the date where the suggestion will be publicly displayed.
+Filename should follow this pattern: `YYYY-MM-DD-the-name-of-the-episode.md`, where the prepended date corresponds to the date where the suggestion will be publicly displayed.
 
 * A list of key-values can be used in the [front matter](https://jekyllrb.com/docs/frontmatter/) of the file:
 ```
