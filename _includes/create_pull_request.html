@@ -6,8 +6,7 @@
     return string.replace(/[\.\/ ~\^\[\]]/g, '-');
   }
 
-  // TODO
-  function validateRequest ({ publicationDate, episode }) {
+  function validateRequest ({ publicationDate, episod}) {
     if (!episode) {
       writeFeedback('Missing episode name.', 'validation')
       return false
