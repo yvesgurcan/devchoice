@@ -7,9 +7,13 @@
   }
 
   // TODO
-  function validateRequest ({ episode }) {
+  function validateRequest ({ publicationDate, episode }) {
     if (!episode) {
       writeFeedback('Missing episode name.', 'validation')
+      return false
+    }
+    if (!publicationDate) {
+      writeFeedback('Missing publication date.', 'validation')
       return false
     }
 
@@ -48,6 +52,7 @@
 
   function createTextFile (data, imageFilename) {
     const {
+	  publicationDate,
       branch,
       episode,
       permalink,
@@ -57,19 +62,19 @@
       media,
     } = data;
     return {
-      path: `_podcasts/${branch}.md`,
+      path: `_podcasts/${publicationDate}-${branch}.md`,
       type: 'blob',
       mode: '100644',
       content:
-      `---
-      episode: ${episode}
-      permalink: ${permalink}
-      podcast: ${podcast}
-      image: ${imageFilename}
-      description: ${description}
-      link: ${link}
-      media: ${media}
-      ---`.replace(/            /g, ''),
+`---
+episode: ${episode}
+permalink: ${permalink}
+podcast: ${podcast}
+image: ${imageFilename}
+description: ${description}
+link: ${link}
+media: ${media}
+---`.replace(/            /g, ''),
     }
   }
 
@@ -99,6 +104,7 @@
     if (event) {
       event.preventDefault();      
     }
+    const publicationDate = document.getElementById('publicationDate').value;
     const episode = document.getElementById('episode').value;
     const slug = document.getElementById('permalink').value;
     const podcast = document.getElementById('podcast').value;
@@ -106,6 +112,7 @@
     const link = document.getElementById('link').value;
     const media = document.getElementById('media').value;
     const image = document.getElementById('image').value;
+    const imagePath = document.getElementById('imagePath').value; // alternate, if you want to reuse an existing image in the images folder
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
@@ -114,6 +121,7 @@
     const credentials = btoa(`${username}:${password}`);
 
     const data = {
+	  publicationDate,
       episode,
       permalink,
       podcast,
@@ -121,6 +129,7 @@
       link,
       media,
       image,
+	  imagePath,
       branch,
       username,
       password,
@@ -172,7 +181,7 @@
 
     const imageResult = createImage(data);
     const newTree = [
-      createTextFile(data, imageResult.filename || ''),
+      createTextFile(data, imagePath || imageResult.filename || ''),
       imageResult.blob,
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
