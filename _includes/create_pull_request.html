@@ -12,17 +12,17 @@
 	  episode,
 	  image,
 	  imageName,
-	  }) {
+	}) {
     if (!episode) {
-      writeFeedback('Missing episode name.', 'validation')
+      writeFeedback('Missing episode name.', 'validation');
       return false;
     }
     if (!unpublished && !publicationDate) {
-      writeFeedback('Missing publication date.', 'validation')
+      writeFeedback('Missing publication date.', 'validation');
       return false;
     }
 	if (imageName && !image) {
-      writeFeedback('Missing an image file.', 'validation')
+      writeFeedback('Missing an image file.', 'validation');
       return false;
 	}
 
@@ -35,12 +35,12 @@
   }
 
   function readResponseError ({ status, statusText}) {
-    writeFeedback(`Error ${status}: ${statusText}`, 'error')
-    return { error: true, status, statusText }
+    writeFeedback(`Error ${status}: ${statusText}`, 'error');
+    return { error: true, status, statusText };
   }
 
   function writeFeedback (string, status) {
-    console.log(string)
+    console.log(string);
     document.getElementById('feedback').innerHTML = string;
   }
 
@@ -114,6 +114,9 @@ media: ${media}
     if (event) {
       event.preventDefault();      
     }
+
+	writeFeedback('Validating input...', 'info');
+
     const unpublished = document.getElementById('publicationDate').checked;
     const publicationDate = document.getElementById('publicationDate').value;
     const episode = document.getElementById('episode').value;
@@ -165,6 +168,8 @@ media: ${media}
         .catch(error => writeFeedback(`Error: ${error.message}`));
     }
 
+	writeFeedback('Sending...', 'info');
+
     const fetchHead = await fetchWithAuth('{{ site.github_api }}/git/refs/heads/master');
     if (fetchHead.error) return;
 
@@ -207,7 +212,7 @@ media: ${media}
     }, 201);
     if (createTree.error) return;
     const newTreeSha = extractSha(createTree);
-    console.log(`Created new tree: ${newTreeSha}`)
+    console.log(`Created new tree: ${newTreeSha}`);
 
     const createCommit = await fetchWithAuth('{{ site.github_api }}/git/commits', {
       method: 'post',
@@ -219,7 +224,7 @@ media: ${media}
     }, 201);
     if (createCommit.error) return;
     const newCommitId = extractSha(createCommit);
-    console.log(`Changes committed to ${branch}.`)
+    console.log(`Changes committed to ${branch}.`);
 
     const pushChanges = await fetchWithAuth(`{{ site.github_api }}/git/refs/heads/${branch}`, {
       method: 'post',
@@ -228,10 +233,12 @@ media: ${media}
       }),
     });
     if (pushChanges.error) return;
-    console.log(`Pushed commit to ${branch}!`)
+    console.log(`Pushed commit to ${branch}!`);
 
     // TODO
     // const createPullRequest = fetchWithAuth("{{ site.github_api }}/pulls")
+
+	writeFeedback('Success.', 'success');
 
     return true;
   }
