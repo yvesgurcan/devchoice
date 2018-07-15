@@ -3,7 +3,6 @@ layout: list
 ---
       <h4>Add Episode</h4>
       <form id="create-pull-request">
-{% include checkbox.html id="unpublished" label="Do not publish" %}
 {% include input.html id="publicationDate" label="Publication Date" %}
 {% include input.html id="episode" label="Episode" %}
 {% include input.html id="permalink" label="Permalink" value="/" %}
@@ -14,6 +13,7 @@ layout: list
 {% include input.html id="image" type="file" label="Image" %}
 {% include input.html id="imageName" label="Image Name" %}
 {% include input.html id="existingImage" label="Existing Image" %}
+{% include checkbox.html id="unpublished" label="Do not publish" %}
         <hr>
         <h5>GitHub Credentials</h5>
 {% include input.html id="username" label="Username" %}
