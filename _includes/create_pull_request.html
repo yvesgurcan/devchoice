@@ -12,19 +12,29 @@
 	  episode,
 	  image,
 	  imageName,
+	  username,
+	  password,
 	}) {
+	if (!username) {
+      writeFeedback('Enter your GitHub username', 'validation');
+      return false;
+	}
+	if (!password) {
+      writeFeedback('Enter your GitHub password', 'validation');
+      return false;
+	}
+	if (imageName && !image) {
+      writeFeedback('Choose an image from your device.', 'validation');
+      return false;
+	}
     if (!episode) {
-      writeFeedback('Missing episode name.', 'validation');
+      writeFeedback('Enter episode name.', 'validation');
       return false;
     }
     if (!unpublished && !publicationDate) {
-      writeFeedback('Missing publication date.', 'validation');
+      writeFeedback('Enter publication date.', 'validation');
       return false;
     }
-	if (imageName && !image) {
-      writeFeedback('Missing an image file.', 'validation');
-      return false;
-	}
 
     return true;
   }
