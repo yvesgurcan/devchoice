@@ -183,8 +183,12 @@ header {
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group-margin {
+	margin-bottom: 10px;
 }
 
 .button {
