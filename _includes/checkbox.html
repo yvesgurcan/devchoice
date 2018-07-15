@@ -1,4 +1,8 @@
 <div class=" form-group-margin">
-	<input id="{{ include.id }}" type="checkbox" checked="{{ include.checked }}">
+	{% if include.checked %}
+		<input id="{{ include.id }}" type="checkbox" checked>
+	{% else %}
+		<input id="{{ include.id }}" type="checkbox">
+	{% endif %}
 	<label for="{{ include.id }}">{{ include.label }}</label>
   </div>
