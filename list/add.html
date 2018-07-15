@@ -3,19 +3,21 @@ layout: list
 ---
       <h4>Add Episode</h4>
       <form id="create-pull-request">
-{% include input.html input="publicationDate" label="Publication Date" %}
-{% include input.html input="episode" label="Episode" %}
-{% include input.html input="permalink" label="Permalink" value="/" %}
-{% include input.html input="podcast" label="Podcast" %}
-{% include textarea.html input="description" label="Description" %}
-{% include input.html input="link" label="Link" %}
-{% include input.html input="media" label="Media" %}
-{% include input.html input="image" type="file" label="Image" %}
-{% include input.html input="imagePath" label="Use Existing Image" %}
+{% include checkbox.html id="unpublished" label="Do not publish" %}
+{% include input.html id="publicationDate" label="Publication Date" %}
+{% include input.html id="episode" label="Episode" %}
+{% include input.html id="permalink" label="Permalink" value="/" %}
+{% include input.html id="podcast" label="Podcast" %}
+{% include textarea.html id="description" label="Description" %}
+{% include input.html id="link" label="Link" %}
+{% include input.html id="media" label="Media" %}
+{% include input.html id="image" type="file" label="Image" %}
+{% include input.html id="imageName" label="Image Name" %}
+{% include input.html id="existingImage" label="Existing Image" %}
         <hr>
         <h5>GitHub Credentials</h5>
-{% include input.html input="username" label="Username" %}
-{% include input.html input="password" type="password" label="Password" %}
+{% include input.html id="username" label="Username" %}
+{% include input.html id="password" type="password" label="Password" %}
 <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer">Create a one-time token.</a>
         <div id="feedback"></div>
         <button id="submit">Commit</button>
