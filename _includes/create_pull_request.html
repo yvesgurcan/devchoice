@@ -80,6 +80,8 @@
       description,
       link,
       media,
+	  imageName,
+	  existingImage,
     } = data;
     return {
       path: unpublished ? `_unpublished/${branch}.md` : `_podcasts/${publicationDate}-${branch}.md`,
@@ -90,7 +92,7 @@
 episode: ${episode}
 permalink: ${permalink}
 podcast: ${podcast}
-image: ${imageFilename}
+image: ${existingImage || imageName}
 description: ${description}
 link: ${link}
 media: ${media}
@@ -108,8 +110,8 @@ media: ${media}
 	  existingImage,
     } = data;
 
-	// do not create an image if input includes an existing image or if form is not valid
-    if (!image || !imageName || existingImage) return {
+	// do not create an image if input includes an existing image or if image-related data is empty
+    if (existingImage || !image || !imageName) return {
       blob: null,
     }
 
