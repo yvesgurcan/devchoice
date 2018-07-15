@@ -18,6 +18,8 @@ feed:
 collections:
   podcasts:
     output: true
+  unpublished:
+    output: true
   
 defaults:
   -
