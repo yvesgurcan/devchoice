@@ -6,15 +6,25 @@
     return string.replace(/[\.\/ ~\^\[\]]/g, '-');
   }
 
-  function validateRequest ({ publicationDate, episod}) {
+  function validateRequest ({
+	  unpublished,
+	  publicationDate,
+	  episode,
+	  image,
+	  imageName,
+	  }) {
     if (!episode) {
       writeFeedback('Missing episode name.', 'validation')
-      return false
+      return false;
     }
-    if (!publicationDate) {
+    if (!unpublished && !publicationDate) {
       writeFeedback('Missing publication date.', 'validation')
-      return false
+      return false;
     }
+	if (imageName && !image) {
+      writeFeedback('Missing an image file.', 'validation')
+      return false;
+	}
 
     return true;
   }
@@ -49,8 +59,9 @@
     return url;
   }
 
-  function createTextFile (data, imageFilename) {
+  function createTextFile (data) {
     const {
+	  unpublished,
 	  publicationDate,
       branch,
       episode,
@@ -61,7 +72,7 @@
       media,
     } = data;
     return {
-      path: `_podcasts/${publicationDate}-${branch}.md`,
+      path: unpublished ? `_unpublished/${branch}.md` : `_podcasts/${publicationDate}-${branch}.md`,
       type: 'blob',
       mode: '100644',
       content:
@@ -73,7 +84,7 @@ image: ${imageFilename}
 description: ${description}
 link: ${link}
 media: ${media}
----`.replace(/            /g, ''),
+---`,
     }
   }
 
@@ -83,17 +94,17 @@ media: ${media}
       episode,
       podcast,
       image,
+	  imageName,
+	  existingImage,
     } = data;
-    if (!image) return {
-      filename: null,
+
+	// do not create an image if input includes an existing image or if form is not valid
+    if (!image || !imageName || existingImage) return {
       blob: null,
     }
-    
-    // TODO
-    const filename = 'something.jpg';
 
+	// TODO
     return {
-      filename,
       blob: {
       },
     }
@@ -103,6 +114,7 @@ media: ${media}
     if (event) {
       event.preventDefault();      
     }
+    const unpublished = document.getElementById('publicationDate').checked;
     const publicationDate = document.getElementById('publicationDate').value;
     const episode = document.getElementById('episode').value;
     const slug = document.getElementById('permalink').value;
@@ -111,7 +123,8 @@ media: ${media}
     const link = document.getElementById('link').value;
     const media = document.getElementById('media').value;
     const image = document.getElementById('image').value;
-    const imagePath = document.getElementById('imagePath').value; // alternate, if you want to reuse an existing image in the images folder
+    const imageName = document.getElementById('imageName').value;
+    const existingImage = document.getElementById('existingImage').value;
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
@@ -120,6 +133,7 @@ media: ${media}
     const credentials = btoa(`${username}:${password}`);
 
     const data = {
+	  unpublished,
 	  publicationDate,
       episode,
       permalink,
@@ -128,13 +142,14 @@ media: ${media}
       link,
       media,
       image,
-	  imagePath,
+	  imageName,
+	  existingImage,
       branch,
       username,
       password,
       credentials,
     };
-    console.log({data});
+    console.log({ data });
 
     if (!validateRequest(data)) return;
 
@@ -178,10 +193,10 @@ media: ${media}
     if (createBranch.error) return;
     console.log(`Created branch: ${branch}.`);
 
-    const imageResult = createImage(data);
+    const { blob } = createImage(data);
     const newTree = [
-      createTextFile(data, imagePath || imageResult.filename || ''),
-      imageResult.blob,
+      createTextFile(data),
+      blob,
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
       method: 'post',
