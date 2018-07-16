@@ -206,10 +206,9 @@ media: ${media}
     if (createBranch.error) return;
     console.log(`Created branch: ${branch}.`);
 
-    const { blob } = createImage(data);
     const newTree = [
       createTextFile(data),
-      blob,
+      createImage(data),
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
       method: 'post',
