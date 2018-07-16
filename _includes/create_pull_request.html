@@ -23,6 +23,10 @@
       writeFeedback('Enter your GitHub password', 'validation');
       return false;
 	}
+	if (!imageName && image) {
+      writeFeedback('Enter a name for the uploaded image.', 'validation');
+      return false;
+	}
 	if (imageName && !image) {
       writeFeedback('Choose an image from your device.', 'validation');
       return false;
@@ -111,7 +115,7 @@ media: ${media}
     if (existingImage || !image || !imageName) return null;
 
     return {
-	  path: `images/${fileName}`,
+	  path: `images/${imageName}`,
       type: 'blob',
       mode: '100644',
       content: image,
