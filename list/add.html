@@ -5,16 +5,16 @@ layout: list
       <form id="create-pull-request">
 	    <div>
 {% include checkbox.html id="unpublished" label="Do not publish" %}
-{% include input.html id="publicationDate" label="Publication Date" %}
-{% include input.html id="episode" label="Episode" %}
+{% include input.html id="publicationDate" label="Publication Date" placeholder="YYYY-MM-DD" %}
+{% include input.html id="episode" label="Episode" placeholder="Name of the episode" %}
 {% include input.html id="permalink" label="Permalink" value="/" %}
-{% include input.html id="podcast" label="Podcast" %}
-{% include textarea.html id="description" label="Description" %}
-{% include input.html id="link" label="Link" %}
-{% include input.html id="media" label="Media" %}
+{% include input.html id="podcast" label="Podcast" placeholder="Name of the podcast" %}
+{% include textarea.html id="description" label="Description" placeholder="A short description of the show" %}
+{% include input.html id="link" label="Link" placeholder="The webpage where users can see more details about the show" %}
+{% include input.html id="media" label="Media" placeholder="The URL from which the file can be listened to" %}
 {% include input.html id="image" type="file" accept="image/*" label="Image" %}
-{% include input.html id="imageName" label="Image Name" %}
-{% include input.html id="existingImage" label="Existing Image" %}
+{% include input.html id="imageName" label="Image Name" placeholder="Name of the uploaded image with its extension" %}
+{% include input.html id="existingImage" label="Existing Image" placeholder="Name of a picture in /images with its extension" %}
 		</div>
 		<hr>
 		<div>
