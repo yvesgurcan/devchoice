@@ -123,7 +123,8 @@ media: ${media}
   }
 
   async function createPullRequest (event = undefined) {
-    if (event) {
+	try {
+	if (event) {
       event.preventDefault();      
     }
 
@@ -252,6 +253,12 @@ media: ${media}
 	writeFeedback('Success.', 'success');
 
     return true;
+		
+	}
+	catch (error) {
+      console.log(`Oops!`, error);
+	  writeFeedback(`An error occurred: ${error.message}`, 'error');
+	}
   }
 
   document.getElementById('create-pull-request').addEventListener('submit', function(event) {
