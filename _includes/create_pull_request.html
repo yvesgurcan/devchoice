@@ -102,23 +102,19 @@ media: ${media}
 
   function createImage (data) {
     const {
-      branch,
-      episode,
-      podcast,
       image,
 	  imageName,
 	  existingImage,
     } = data;
 
 	// do not create an image if input includes an existing image or if image-related data is empty
-    if (existingImage || !image || !imageName) return {
-      blob: null,
-    }
+    if (existingImage || !image || !imageName) return null;
 
-	// TODO
     return {
-      blob: {
-      },
+	  path: `images/${fileName}`,
+      type: 'blob',
+      mode: '100644',
+      content: image,
     }
   }
 
