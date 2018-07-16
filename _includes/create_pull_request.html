@@ -111,13 +111,13 @@ media: ${media}
 		const result = event.target.result;
 		resolve(result);
 	  };
-	  fileReader.readAsBinaryString(image);
+	  fileReader.readAsDataURL(image);
 	})
   }
 
   async function createImage (data) {
     const {
-      image,
+      imagerm,
 	  imageName,
 	  existingImage,
     } = data;
