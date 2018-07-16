@@ -229,7 +229,7 @@ media: ${media}
 
     const newTree = [
       createTextFile(data),
-      createImage(data),
+      await createImage(data),
     ];
     const createTree = await fetchWithAuth('{{ site.github_api }}/git/trees', {
       method: 'post',
