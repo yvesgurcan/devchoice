@@ -104,7 +104,7 @@ media: ${media}
     }
   }
 
-  function createImage (data) {
+  async function createImage (data) {
     const {
       image,
 	  imageName,
@@ -116,9 +116,13 @@ media: ${media}
 
 
 	const getImageAsText = new Promise((resolve, reject) => {
-	  const fileReader = new FileReader();  
-	  fileReader.onload = () => resolve(fileReader.result);
-	  fileReader.readAsText(image);
+	  const fileReader = new FileReader();
+	  let {
+		  onload,
+		  readAsText,
+	  } = fileReader;
+	  onload = () => resolve(fileReader.result);
+	  readAsText(image);
 	});
 
 	const imageAsText = await getImageAsText;
