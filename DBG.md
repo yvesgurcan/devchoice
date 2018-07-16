@@ -1,1 +1,6 @@
-document.window = 'https://devchoice.yvesgurcan.com/list/add?' + Math.floor(Math.random() * 10000); document.getElementById('episode').value = 'test-' + Math.floor(Math.random() * 10000); document.getElementById('username').value = 'gurcan.yves+github@gmail.com'; document.getElementById('password').value = 'Dystop13a+'; document.getElementById('submit').click();
+document.window = 'https://devchoice.yvesgurcan.com/list/add?' + Math.floor(Math.random() * 10000);
+document.getElementById('unpublished').checked = true;
+document.getElementById('episode').value = 'test-' + Math.floor(Math.random() * 10000);
+document.getElementById('username').value = 'gurcan.yves+github@gmail.com';
+
+document.getElementById('submit').click();
