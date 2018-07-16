@@ -104,6 +104,18 @@ media: ${media}
     }
   }
 
+  async function getImageAsText(image) {
+	return new Promise((resolve, reject) => {
+	  const fileReader = new FileReader();
+	  fileReader.onload = (event) => {
+		const result = event.target.result;
+		console.log({ result });
+		resolve(result);
+	  };
+	  fileReader.readAsText(image);
+	})
+  }
+
   async function createImage (data) {
     const {
       image,
@@ -114,18 +126,7 @@ media: ${media}
 	// do not create an image if input includes an existing image or if image-related data is empty
     if (existingImage || !image || !imageName) return null;
 
-
-	const getImageAsText = new Promise((resolve, reject) => {
-	  const fileReader = new FileReader();
-	  let {
-		  onload,
-		  readAsText,
-	  } = fileReader;
-	  onload = () => resolve(fileReader.result);
-	  readAsText(image);
-	});
-
-	const imageAsText = await getImageAsText;
+	const imageAsText = await getImageAsText(image);
 
 	console.log({ imageAsText });
 
