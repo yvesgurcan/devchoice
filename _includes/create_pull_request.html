@@ -109,10 +109,9 @@ media: ${media}
 	  const fileReader = new FileReader();
 	  fileReader.onload = (event) => {
 		const result = event.target.result;
-		console.log({ result });
 		resolve(result);
 	  };
-	  fileReader.readAsDataURL(image);
+	  fileReader.readAsBinaryString(image);
 	})
   }
 
