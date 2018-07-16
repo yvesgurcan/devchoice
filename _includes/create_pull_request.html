@@ -284,9 +284,9 @@ media: ${media}
 		  title: `${podcast} - ${episode}`,
 		  head: branch,
 		  base: 'master',
-		  body: 'Add a new episode.',
+		  body: 'Add a new show.',
 	  }),
-	})
+	}, 201)
     if (createPullRequest.error) return;
     console.log(`Created pull request.`);
 
