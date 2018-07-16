@@ -114,11 +114,22 @@ media: ${media}
 	// do not create an image if input includes an existing image or if image-related data is empty
     if (existingImage || !image || !imageName) return null;
 
+
+	const getImageAsText = new Promise((resolve, reject) => {
+	  const fileReader = new FileReader();  
+	  fileReader.onload = () => resolve(fileReader.result);
+	  fileReader.readAsText(image);
+	});
+
+	const imageAsText = await getImageAsText;
+
+	console.log({ imageAsText });
+
     return {
 	  path: `images/${imageName}`,
       type: 'blob',
       mode: '100644',
-      content: image,
+      content: imageAsText,
     }
   }
 
