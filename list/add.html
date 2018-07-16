@@ -3,6 +3,8 @@ layout: list
 ---
       <h4>Add Episode</h4>
       <form id="create-pull-request">
+	    <div>
+{% include checkbox.html id="unpublished" label="Do not publish" %}
 {% include input.html id="publicationDate" label="Publication Date" %}
 {% include input.html id="episode" label="Episode" %}
 {% include input.html id="permalink" label="Permalink" value="/" %}
@@ -10,17 +12,19 @@ layout: list
 {% include textarea.html id="description" label="Description" %}
 {% include input.html id="link" label="Link" %}
 {% include input.html id="media" label="Media" %}
-{% include input.html id="image" type="file" label="Image" %}
+{% include input.html id="image" type="file" accept="image/*" label="Image" %}
 {% include input.html id="imageName" label="Image Name" %}
 {% include input.html id="existingImage" label="Existing Image" %}
-{% include checkbox.html id="unpublished" label="Do not publish" %}
-        <hr>
-        <h5>GitHub Credentials</h5>
+		</div>
+		<hr>
+		<div>
+		  <h5>GitHub Credentials</h5>
 {% include input.html id="username" label="Username" %}
 {% include input.html id="password" type="password" label="Password" %}
+		  <p id="feedback"></p>
+		</div>
+		<button id="submit">Submit</button>
 		<p><a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer">Create a one-time token.</a></p>
 		<p><a href="https://github.com/yvesgurcan/devchoice.yvesgurcan.com/pulls" target="_blank" rel="noopener noreferrer">See pull requests.</a></p>
-        <p id="feedback"></p>
-        <button id="submit">Submit</button>
       </form>
       {% include create_pull_request.html %}
