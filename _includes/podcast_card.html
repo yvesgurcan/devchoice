@@ -3,10 +3,11 @@
         <div class="wrapper">
           <div class="content">
             <div class="image">
-              {% if podcast.image %}<a href="{{ podcast.url }}">
+              <a href="{{ podcast.url }}">
                 {% if podcast.image contains '://' %}<img src="{{ podcast.image }}" />
-                {% else %}<img src="/images/{{ podcast.image }}" />{% endif %}
-              </a>{% endif %}
+                {% else if podcast.image %}<img src="/images/{{ podcast.image }}" />
+                {% else %}<img src="{{ site.feed.logo }}" />{% endif %}
+              </a>
             </div>
             <div>
               <h4>
