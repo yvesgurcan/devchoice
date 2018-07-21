@@ -1,9 +1,9 @@
 <script>
   function removeIllegalCharacters(string, variation = false) {
     if (variation) {
-      return string.replace(/[\. ~\^\[\]]/g, '-');
+      return string.replace(/[\\?\. ~\^\[\]]/g, '-');
     }
-    return string.replace(/[\.\/ ~\^\[\]]/g, '-');
+    return string.replace(/[\\?\.\/ ~\^\[\]]/g, '-');
   }
 
   function validateRequest ({
